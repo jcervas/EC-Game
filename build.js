@@ -335,6 +335,15 @@ require([
 
     function ready(err, seedData, userData) {
         if (err) console.warn(err);
+console.log(countByState(userData))
+console.log(userData)
+        function countByState(data) {
+            return d3.nest()
+                .key(function(d) { return d.round; })
+                .rollup(function(d) { return +d[0].a; })
+                .map(data);
+        }
+
 
         gdata = combineData(seedData, userData);
 
@@ -541,10 +550,11 @@ require([
                 guessF: userGuessF,
                 guessG: userGuessG,
                 mobile: mobile,
-                timePondered: ((new Date()).getTime() - currentTime) / 1000,
-                initialSet: [a,b,c]
+                timePondered: ((new Date()).getTime() - currentTime) / 1000
             };
-console.log(userData)
+               console.log(userData)
+
+
             pushData(userData, function(err, status) {
                 if (err) return console.warn('error', status);
                 // console.log('worked!');
