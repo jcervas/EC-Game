@@ -16,77 +16,74 @@ define('nyt5/analytics',[],function() {
 });
 
 
-define('pushData',[
-    'jquery/nyt',
-    'https://int.nyt.com/applications/godzown/assets/godzown.js',
-    'foundation/models/user-data',
-], function($, godZown, userData) {
-
-  //dont know if this matters http://attribute.adm.int.newsdev.net/projects/number-guessing-game
-
-
-    // in staging
-    // https://int.stg.nyt.com/applications/godzown/assets/godzown.js
-    // godZown.setHost("http://www.stg.nytimes.com/"); // for staging
-    //godZown.setHost("http://www.nytimes.com/"); // for production
-    godZown.setHost("http://0.0.0.0:8000/"); // for local development
-
-    var godzown_slug = "2015-07-28-number-guessing-game",
-        attr_slug = "number-guessing-game",
-        // attr_url = 'http://projects.nytimes.com/attribute/projects/' + attr_slug + '/submissions.json';
-        attr_url = "http://attribute-collector.newsdev.nytimes.com/projects/" + attr_slug + "/submissions";
-    // setItem takes two arguments: slug, and a JSON object (not array) to be saved.
-    //
-    // Requests to the backend are throttled to 2000 ms
-
-    return function(data, callback) {
-
-
-        data.userId = userData.getUserId();
-        data.loggedIn = userData.isLoggedIn();
-        // data.subscriber = userData.isLoggedIn() && (userData.isWebSubscriber() || userData.isMobileSubscriber() || userData.isTabletSubscriber() || userData.isSmartphoneSubscriber());
-
-        godZown.getItem(godzown_slug).fail(function(err) {
-            // console.log('godzown.getItem failed with this error', err.status);
-            // this means that it only pushes the first time.
-            if (err.status == 404) push();
-        }).done(function() {
-            // push anyway on localhost to make my life easier
-            // if (location.hostname == 'localhost.nytimes.com') push();
-        });
-
-
-        // alternative data
-        $.ajax({
-            url: attr_url,
-            type: 'POST',
-            data: data,
-            xhrFields: {
-                withCredentials: true
-            }
-        });
-
-        function push() {
-            // console.log('push', data);
-            godZown.setItem(godzown_slug, {
-                date: new Date(),
-                data: data
-            })
-            .done(function(status) {
-                if (status.success) {
-                    console.log('saved!');
-                    callback(null);
-                } else callback('fail', status);
-            })
-            .fail(function(jqXHR) {
-                callback('bad request', jqXHR);
-            });
-        }
-    };
-
-
-
-});
+// define('pushData',[
+//     'jquery/nyt',
+//     'https://int.nyt.com/applications/godzown/assets/godzown.js',
+//     'foundation/models/user-data',
+// ], function($, godZown, userData) {
+//
+//   //dont know if this matters http://attribute.adm.int.newsdev.net/projects/number-guessing-game
+//
+//
+//     // in staging
+//     // https://int.stg.nyt.com/applications/godzown/assets/godzown.js
+//     // godZown.setHost("http://www.stg.nytimes.com/"); // for staging
+//     //godZown.setHost("http://www.nytimes.com/"); // for production
+//     godZown.setHost("http://0.0.0.0:8000/"); // for local development
+//
+//     var godzown_slug = "2015-07-28-number-guessing-game",
+//         attr_slug = "number-guessing-game",
+//         // attr_url = 'http://projects.nytimes.com/attribute/projects/' + attr_slug + '/submissions.json';
+//         attr_url = "http://attribute-collector.newsdev.nytimes.com/projects/" + attr_slug + "/submissions";
+//     // setItem takes two arguments: slug, and a JSON object (not array) to be saved.
+//     //
+//     // Requests to the backend are throttled to 2000 ms
+//
+//     return function(data, callback) {
+//
+//
+//         data.userId = userData.getUserId();
+//         data.loggedIn = userData.isLoggedIn();
+//         // data.subscriber = userData.isLoggedIn() && (userData.isWebSubscriber() || userData.isMobileSubscriber() || userData.isTabletSubscriber() || userData.isSmartphoneSubscriber());
+//
+//         godZown.getItem(godzown_slug).fail(function(err) {
+//             // console.log('godzown.getItem failed with this error', err.status);
+//             // this means that it only pushes the first time.
+//             if (err.status == 404) push();
+//         }).done(function() {
+//             // push anyway on localhost to make my life easier
+//             // if (location.hostname == 'localhost.nytimes.com') push();
+//         });
+//
+//
+//         // alternative data
+//         $.ajax({
+//             url: attr_url,
+//             type: 'POST',
+//             data: data,
+//             xhrFields: {
+//                 withCredentials: true
+//             }
+//         });
+//
+//         function push() {
+//             // console.log('push', data);
+//             godZown.setItem(godzown_slug, {
+//                 date: new Date(),
+//                 data: data
+//             })
+//             .done(function(status) {
+//                 if (status.success) {
+//                     console.log('saved!');
+//                     callback(null);
+//                 } else callback('fail', status);
+//             })
+//             .fail(function(jqXHR) {
+//                 callback('bad request', jqXHR);
+//             });
+//         }
+//     };
+// });
 
 // db.items.count({slug: "2015-06-02-marriage-chart-game"})
 ;
@@ -218,13 +215,13 @@ require([
     'nyt5/analytics',
     'd3/3',
     'queue/1',
-    'pushData',
+    // 'pushData',
     'amanda',
     'https://int.nyt.com/applications/godzown/assets/godzown.js',
     // 'resizerScript'     // uncomment this line to include resizerScript
     // 'lib/text-balancer' // uncomment to balance headlines
     // 'templates'         // uncomment to use src/templates
-], function($, _, PageManager, Analytics, d3, queue, pushData, amandaFunc, godZown) {
+], function($, _, PageManager, Analytics, d3, queue) {
 
     window.$ = $;
     var margin = {top: 5, right: 5, bottom: 45, left: 35};
@@ -236,7 +233,7 @@ require([
         return d%5 === 0 ? d : "";
     };
 
-    var amanda;
+    // var amanda;
     var gdata;
 
     d3.select(".g-smallcaps").text("").append("a").text("*").attr("href", "#g-note");
@@ -281,6 +278,7 @@ require([
         .defer(d3.tsv, NYTG_ASSETS + "starter.tsv")
         .defer(d3.json, userResultsUrl)
         .await(ready);
+
 
     var a = generateQAPairs(".g-option-1", ".g-answer-1", 30,80);
     var b = generateQAPairs(".g-option-2", ".g-answer-2", 0,49);
