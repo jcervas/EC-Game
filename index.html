@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<!--[if (gt IE 9)|!(IE)]> <!-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title data-rh="true">EC Game</title>
+    <link data-rh="true" rel="canonical" href="https://www.nytimes.com/interactive/2015/08/13/upshot/are-you-smarter-than-other-new-york-times-readers.html" />
+    <link id="legacy-zam5nzz" rel="stylesheet" type="text/css" href="https://typeface.nyt.com/css/zam5nzz.css" media="all" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://www.nytimes.com/vi-assets/static-assets/nyt5/20190823-143533-mbipe/css/styles.css" />
+    <script>
+        var require = {
+        baseUrl: 'https://www.nytimes.com/vi-assets/static-assets/nyt5/20190823-143533-mbipe/js/',
+        waitSeconds: 20,
+        paths: {
+            'videoFactory': 'https://static01.nyt.com/js2/build/video/2.0/videofactoryrequire',
+            'videoPlaylist': 'https://static01.nyt.com/js2/build/video/players/extended/2.0/appRequire',
+            'auth/mtr': 'https://static01.nyt.com/js/mtr',
+            'auth/growl': 'https://static01.nyt.com/js/auth/growl/default',
+            'vhs': 'https://static01.nyt.com/video/vhs/build/vhs-2.x.min',
+            'vhs3': 'https://static01.nyt.com/video-static/vhs3/vhs.min'
+        }
+    };
+
+    window.NYT_PLATFORM = 'nyt5';
+    window.NYT_CONTEXT = 'inline';
+    window.NYT_ENVIRONMENT = 'prd';
+    </script>
+    <!--[if (gte IE 9)|!(IE)]> <!-->
+    <script data-main="foundation/main" src="https://www.nytimes.com/vi-assets/static-assets/nyt5/20190823-143533-mbipe/js/framework.js"></script>
+    <!--<![endif]-->
+    <!--[if lt IE 9]>
+<script>require.map = { '*': { 'foundation/main': 'foundation/legacy_main' } };</script>
+<script data-main="foundation/legacy_main" src="https://www.nytimes.com/vi-assets/static-assets/nyt5/20190823-143533-mbipe/js/framework.js"></script>
+<![endif]-->
+    <script>
+        require(['foundation/main'], function() {
+        require(['auth/mtr']);
+    });
+    </script>
+    <main id="main" class="main" role="main">
+        <article id="story" class="story theme-interactive theme-main">
+            <div id="are-you-smarter-than-other-new-york-times-readers" class="interactive-graphic">
+                <!--
+
+======================================================
+
+THIS IS A GENERATED TEMPLATE FILE. DO NOT EDIT.
+
+======================================================
+
+-->
+                <!--                 <script type="text/javascript">
+                var h1 = document.querySelector('.interactive-headline');
+
+                if (innerWidth > 414) {
+                    h1.innerHTML = "Puzzle: Are You Smarter Than <span class='g-num-nyt-users'></span><br>Other New York Times Readers?";
+                } else {
+                    h1.innerHTML = "Puzzle: Are You Smarter Than <span class='g-num-nyt-users'></span> Other New York Times Readers?";
+                }
+                </script> -->
+                <!-- this is generated from src/style.css -->
+                <style>
+                    /* Center headlines for standalone and embedded interactives */
+/* @import url("nyt5/centered-headline.css"); */
+/* Fullbleed interactive-graphic container */
+/* @import url("nyt5/fullbleed.css"); */
+/* Fix spacing at top of story */
+
+
+html #reactContainer {
+  display: none !important;
+}
+.axis text {
+  font-size: 12px;
+  fill: #777;
+}
+.axis path {
+  display: none;
+}
+.axis line {
+  stroke-width: 1px;
+  stroke: #eee;
+}
+.x.axis line {
+  display: none;
+}
+.x.axis .tick.g-major line {
+  display: block;
+}
+.tick.g-baseline line {
+  stroke: #000;
+  stroke-dasharray: 0;
+}
+.g-bar {
+  stroke: #ccc;
+}
+.g-current-winning-entry {
+  stroke: #7fa4ce;
+}
+.g-user-guess {
+  stroke: #c27799;
+}
+.g-user-average {
+  stroke: #777777;
+}
+.g-histogram {
+  width: 100%;
+  min-height: 300px;
+  position: relative;
+}
+.viewport-medium .g-histogram {
+  max-width: 1050px;
+  height: 500px;
+}
+.g-histogram-title {
+  font-family: nyt-franklin;
+  font-size: 24px;
+  line-height: 1.3em;
+  margin-bottom: 10px;
+}
+.viewport-medium .g-histogram-title {
+  font-size: 35px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.g-general-copy {
+  margin-top: 50px;
+}
+.g-average-line {
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+.g-histogram-label text {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+.g-histogram-label text.g-number-label {
+  text-anchor: middle;
+}
+.g-histogram-label text.g-halo {
+  stroke: #fff;
+  stroke-width: 3px;
+}
+.g-histogram-subtitle {
+  font-size: 12px;
+  line-height: 27px;
+  font-weight: 200;
+  font-family: nyt-franklin;
+  margin: 0;
+  text-transform: uppercase;
+}
+.g-buffer {
+  fill: #fff;
+}
+.g-key-item-group {
+  margin: 2px 0px;
+}
+.g-key-label {
+  padding-left: 6px;
+}
+
+.g-current-winning-entry {
+  fill: #7fa4ce;
+  background-color: #7fa4ce;
+}
+.g-user-guess {
+  fill: #c27799;
+  background-color: #c27799;
+}
+.g-user-average {
+  fill: #777777;
+  background-color: #777777;
+}
+.g-additional.g-current-winning-entry.g-user-guess {
+  stroke: #7fa4ce;
+  stroke-dasharray: 5,5;
+}
+
+.g-additional.g-user-average.g-user-guess {
+  stroke: #c27799;
+  stroke-dasharray: 5,5;
+}
+
+.g-key-container {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  padding: 10px;
+  background-color: #fff;
+  width: 150px;
+}
+
+.g-key-container table {
+  border-collapse: collapse;
+  position: block;
+}
+.g-key-container table td {
+  padding: 3px 0;
+  border-bottom: 1px solid #dedede;
+}
+.viewport-medium .g-key-container table td {
+  padding: 7px 0;
+}
+.g-key-block {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+.viewport-medium .g-key-block {
+  width: 10px;
+  height: 10px;
+}
+.g-num {
+  text-align: right;
+  padding-right: 20px;
+}
+.g-you {
+  font-weight: bold;
+}
+.g-quintile-line {
+  stroke: #f0f;
+  fill: none;
+}
+.g-x-axis-label {
+  font-size: 11px;
+  text-anchor: end;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.viewport-medium .g-x-axis-label {
+  font-size: 12px;
+}
+.g-starter-footnote {
+  margin-top: 10px;
+  color: #aaa;
+  line-height: 1.3em;
+  font-size: 10px;
+}
+/*@media (min-width: 375px) and (max-width: 415px) {
+  .story-header {
+    padding-top: 100vw !important;
+  }
+}*/
+
+
+@media (max-width: 320px) {
+  .page-interactive-default .story.theme-main .story-header h1,
+  .page-interactive-app .story.theme-main .story-header h1 {
+    font-size: 24px !important;
+    line-height: 1.2em !important;
+  }
+}
+
+.g-select-container {
+  font-family: nyt-franklin;
+  font-weight: 300;
+  position: absolute;
+  left: 100%;
+  top: -200px;
+  display: none;
+}
+
+.g-graphic {
+  font-family: nyt-franklin;
+  font-size: 12px;
+  font-weight: 300;
+  width: 100%;
+  position: relative;
+  margin-bottom: 300px;
+}
+.g-graphic a {
+  text-decoration: underline;
+}
+
+.g-graphic table {
+  text-align: center;
+}
+.viewport-medium .g-graphic {
+  margin-left: 0;
+}
+.viewport-medium .g-graphic .g-bottom-section p,
+.viewport-medium .custom-response-item {
+  font-size: 19px;
+  line-height: 27px;
+}
+.g-top-section {
+  position: relative;
+}
+.viewport-medium .g-top-section {
+  width: 500px;
+}
+#g-input {
+  margin-top: 30px;
+  height: 60px;
+}
+.g-subhed {
+  font-family: nyt-franklin;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.g-instructions-panel p {
+  font-family: nyt-franklin;
+  margin: 12px 0;
+  font-weight: 300;
+}
+.g-overall-instructions {
+  margin-bottom: 25px;
+}
+.g-top-section p {
+  font-size: 17px;
+  line-height: 1.4em;
+}
+.g-fine-print-instructions {
+  margin-bottom: 25px;
+}
+button,
+input {
+  padding: 5px 8px;
+  margin-right: 3px;
+  font-family: 'nyt-franklin', helvetica, arial, sans-serif;
+  font-size: 13px;
+  border: none;
+  border-radius: 3px;
+  border: 1px solid #777;
+}
+button.g-submit {
+  cursor: pointer;
+  background: #16212B;
+  border-color: #16212B;
+  color: #fff;
+}
+button.g-submit:disabled,
+button.g-submit.g-disabled {
+  background: #999;
+  border-color: #999;
+}
+input {
+  color: #666;
+  border: 1px solid #ddd;
+  background: #fff;
+  text-align: center;
+}
+.viewport-small input {
+  width: 16ex;
+}
+.g-hidden {
+  display: none;
+}
+.g-input-notice {
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 9px;
+  color: #AA66D3;
+}
+.g-bottom-copy-container {
+  margin-top: 20px;
+}
+.viewport-medium .g-bottom-copy-container {
+  width: 540px;
+  margin-top: 40px;
+}
+.g-bottom-section {
+  margin-top: 40px;
+}
+.g-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+button:disabled {
+  /*background: #dedede;*/
+  opacity: .5;
+  pointer-events: none;
+}
+.g-select-container {
+  font-family: nyt-franklin;
+  font-weight: 300;
+  position: absolute;
+  left: 100%;
+  display: none;
+}
+.viewport-medium-31 .g-select-container {
+  margin-left: 50px;
+}
+.viewport-large .g-select-container {
+  margin-left: 75px;
+}
+.viewport-large-30 .g-select-container {
+  margin-left: 150px;
+}
+.desktop.viewport-medium-31 .g-select-container {
+  display: block;
+}
+.g-select-container .g-select-wrap img {
+  width: 400px;
+}
+.viewport-medium .g-select-container .g-select-wrap {
+  position: absolute;
+  /*top: 110px;*/
+  width: 400px;
+}
+.g-select-container .g-select-wrap.g-frozen {
+  position: absolute;
+}
+.viewport-medium-10 .g-select-container .g-select-wrap.g-fixed {
+  position: fixed;
+  /*top: 275px;*/
+  z-index: 50;
+}
+#preview-banner {
+  display: none;
+}
+#related-coverage {
+  display: none;
+}
+html #reactContainer {
+  display: none !important;
+}
+.story-footer {
+  display: none !important;
+}
+.g-thanks-note {
+  font-style: italic;
+  margin-top: 50px;
+}
+span.summary-text {
+  font-size: 17px !important;
+}
+blockquote p {
+  color: #777;
+}
+blockquote {
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+.g-people-played {
+  margin-top: 10px;
+  font-size: 10px;
+  color: #999;
+}
+#g-note {
+  font-weight: 300;
+  font-size: 13px;
+  color: #999;
+  line-height: 1.3em;
+}
+.g-smallcaps a {
+  text-decoration: none !important;
+  font-size: 15px;
+}
+</style>
+</head>
+
+<body>
+    <div class="g-graphic">
+        <div class="g-top-section">
+            <h1>Electoral College Game</h1>
+            <div class="g-instructions-panel">
+                <p>Your mission is to out-campaign your opponent, who is competing against you to be President.</p>
+                <p>Imagine that there are seven competitive states in the <strong>NOTUSISTAN</strong> Electoral College used for its presidential elections, operating under the same winner take all, weighted voting rules as in the US Electoral College.</p>
+                <p>Each player has <strong>$100</strong> to spend across the seven states, in increments of <strong>$1</strong> (No decimals or fractions in your numbers are allowed). By directing resources to states, you get a competitive advantage. For every $1 additional spent in a state, you gain an additional 1 percentage point in vote share. For every additional $1 spent by your opponent, you lose 1 percentage point (whoever spends the most money in the state, wins that state).</p>
+                <p>For example, if you allocate $<span class="g-option-1"></span> to <em>State <span class="g-state-1"></span></em>, and your opponent only allocated $<span class="g-answer-1"></span>, you win <em>State <span class="g-state-1a"></span>'s</em> <span class="g-ev-1"></span> EC votes. If instead you allocated $<span class="g-option-2"></span> to <em>State <span class="g-state-2"></span></em>, your opponent would win <span class="g-ev-2"></span> EC votes by allocating anything between $<span class="g-answer-3"></span> and $100.</p>
+                <p>The seven states have Electors shown in the second column. There is a total of 139 EC votes, with <strong>70 needed to win</strong>.</p>
+                <p><strong>Ties in each state are decided by coin toss</strong>. There is no requirement to allocate any money in a state, or you can allocate up to the full allotment in just one state.</p>
+                <p>You compete against one other person, randomly selected from our database. The goal is to win 70 EC votes or more so you become President. </p>
+                <p>When you’re ready, <strong>enter your allotments below</strong>. (You can play as many times as you like, but only your first guess will count.)</p>
+                <div id="g-input">
+                    <table width="50%" border="0">
+                        <tbody>
+                            <tr>
+                                <th scope="col">State</th>
+                                <th scope="col">EC Votes</th>
+                                <th scope="col">Initial Vote Share</th>
+                                <th scope="col">Allocation</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">A</th>
+                                <td>3</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputA" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">B</th>
+                                <td>5</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputB" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">C</th>
+                                <td>8</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputC" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">D</th>
+                                <td>13</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputD" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">E</th>
+                                <td>21</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputE" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">F</th>
+                                <td>34</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputF" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">G</th>
+                                <td>55</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputG" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="3"></th>
+                                <td>
+                                    <div>Total Allocated: $<span class="g-total-allocated">0</span></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="g-submit g-disabled">Submit</button>
+                    <div class="g-input-notice g-rounding-warning g-hidden">This looks like a decimal. Just FYI, we’d round it to <span class="g-decimal-eventual-round"></span>.</div>
+                    <div class="g-input-notice g-out-of-bounds-warning g-hidden">Please enter a number between 0 and 100.</div>
+                    <div class="g-input-notice g-totalHighWarning-warning g-hidden">Please adjust your allocation so it doesn't exceed $100.</div>
+                    <div class="g-input-notice g-totalLowWarning-warning g-hidden">You have not allocated all $100!</div>
+               </div>
+
+                       </div>
+                   </div>
+                    <div class="g-bottom-section g-hidden">
+                       <h2 class="g-histogram-title"></h2>
+                       <div class="g-histogram-subtitle">Percent of readers picking each number:</div>
+                       <div class="g-histogram"></div>
+                       <div class="g-bottom-copy-container">
+<!--                           <div class="g-user-custom-response"></div>
+                          <div class="g-general-copy">
+                               <h3 class="g-matters-hed g-subhed">More than just picking numbers</h3>
+                               <p class="paragraph paragraph-1">This game is a classic one for many psychologists, game theorists and behavioral economists because it highlights the trouble that most people have in thinking more than one or two steps ahead.</p>
+                               <p class="paragraph paragraph-2">Many people may start by realizing that 50 would be roughly the average answer if everyone picked a random number &#x2014; and then calculating that 33 is two-thirds of 50. But if everyone picked 33, then 22 would be the winning answer. So many people go one step beyond the obvious and give answers around 20 &#x2014; or they somehow land there intuitively.</p>
+                               <p class="paragraph paragraph-3">The question is why more people don&#x2019;t keep going and say: Well, 15 is about two-thirds of 22, and 10 is two-thirds of 15 &#x2026; and on and on. Eventually, we&#x2019;ll get to zero, so that&#x2019;s what I&#x2019;ll say.</p>
+                               <p class="paragraph paragraph-4">An answer of zero would be what&#x2019;s known as the <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash equilibrium</a> of this game: the answer people would give after knowing the other players&#x2019; answers and being given infinite opportunities to change their own. In a world of hyper-rationality, the answer to this game would be the Nash equilibrium. Or as Richard Thaler, a founder of behavioral economics, wrote in &#x201C;<a href="http://www.misbehavingbook.org/">Misbehaving</a>,&#x201D; his recent memoir: &#x201C;The Nash equilibrium in this game is a number that if everyone guessed it, no one would want to change their guess.&#x201D;</p>
+                               <p class="paragraph paragraph-5">Instead of reaching this equilibrium, people instead display what the economist Colin Camerer <a href="http://people.hss.caltech.edu/~camerer/Ch08Pg_119-179.pdf">has called</a> &#x201C;k-step thinking.&#x201D;</p>
+                               <p class="paragraph paragraph-6">You may be familiar with k-step thinking even if you&#x2019;ve never heard the term before &#x2014; from the 1987 film &#x201C;<a title="Princess Bride" href="http://www.imdb.com/title/tt0093779/">The Princess Bride</a>.&#x201D; The hero, Westley, challenges the villain Vizzini to a battle of wits: Westley will put a deadly dose of &#x201C;iocaine&#x201D; poison in one of two cups of wine, placing one cup in front of each man, but concealing which one is where. Vizzini must decide whether to choose the one in front of him, or the one in front of Westley &#x2014; and Westley will drink from the other. To win the battle of wits, Vizzini <a href="http://www.imdb.com/video/screenplay/vi2854659097?ref_=ttvi_vi_imdb_2">must guess</a> whether Westley would knowingly put a poisoned cup in front of himself. Here&#x2019;s just one of Vizzini&#x2019;s lines of reasoning:</p>
+                               <blockquote>
+                                   <p>Iocaine comes from Australia, as everyone knows. And Australia is entirely peopled with criminals. And criminals are used to having people not trust them, as you are not trusted by me. So I can clearly not choose the wine in front of you.</p>
+                               </blockquote>
+                               <p class="paragraph paragraph-7">Eventually, Vizzini drinks from the poisoned cup and dies. (In truth, Westley had poisoned both cups.<customspan class="g-smallcaps">*</customspan>)</p>
+                               <p class="paragraph paragraph-8">In our game, someone who guessed randomly is a 0-step thinker. Mr. Camerer, Teck-Hua Ho and Juin-Kuan Chong <a title="zero-step" href="http://people.hss.caltech.edu/~camerer/Ch08Pg_119-179.pdf">say</a> these guessers are &#x201C;fatigued, clueless, overwhelmed, uncooperative, or simply more willing to make a random guess in the first period of a game and learn from subsequent experience than to think hard before learning.&#x201D; If you were not one of the random guessers, if you made some effort to imagine what other players might do, you probably believed other players used one fewer step than you did.</p>
+                               <p class="paragraph paragraph-9">For most people, k is a small number: one, two, three or four. It&#x2019;s just not natural for most of us to think multiple steps ahead.</p>
+                               <p class="paragraph paragraph-10">Examples abound in everyday life. Many people believe that it&#x2019;s better to sell a house in the spring, for example, because more buyers are looking then. But what really matters is the ratio between buyers and sellers. You&#x2019;d rather sell your house when your town has 20 buyers and only 2 sellers than when it has 100 buyers and 500 sellers.</p>
+                               <p class="paragraph paragraph-11">In a highly networked world, these calculations become all the more important. If Uber fares are surging downtown, Uber drivers who happen to be uptown need to think about whether prices will still be surging by the time they can get downtown. People using an online dating site need to think about the desires of their potential mates &#x2014; and the strategies that the competition is using.</p>
+                               <p class="paragraph paragraph-12">But the best example is probably the stock market. As John Maynard Keynes noted, the goal in the stock market is not necessarily to pick the best company. It is to pick the company that others think will be the best company. In fact, it is to pick the company that others think that others think that others think &#x2014; and so on &#x2014; is the best company. He used a &#x201C;beauty contest&#x201D; to describe this idea, after a fictional newspaper contest in which readers had to guess the most beautiful face from a gallery of faces.</p>
+                               <p class="paragraph paragraph-13">In the stock market &#x2014; or the housing market, for that matter &#x2014; people often struggle to think more than one or two steps ahead. That&#x2019;s a big reason that bubbles can form. It was true that a lot of dot-com companies from the 1990s were on to something new and important, just as it was true that housing prices rarely fall. But if everybody else decides that dot-com stocks and houses are a great investment, a problem can easily develop. The prices of those assets can rise so high that they&#x2019;re no longer a good value.</p>
+                               <p class="paragraph paragraph-14">The initial instinct wasn&#x2019;t wrong. The failure to think ahead was the error.</p>
+                               <p class="paragraph paragraph-15">It&#x2019;s a weakness we all have. The best way to combat it is to be aware of it &#x2014; and push back against it.</p>
+                               <p class="paragraph paragraph-16"><em>We want to thank Christopher Nguyen, the chief executive of <a href="http://adatao.com/">Adatao</a>, a data-intelligence company, who originally gave us the idea for this game. We also want to note that The Financial Times ran versions of the game for its subscribers both in 1997 and <a href="http://www.ft.com/intl/cms/s/0/6149527a-25b8-11e5-bd83-71cb60e8f08c.html">this year</a>. In the first version, the winning answer was 13; more recently, it was 12.</em></p>
+                               <p class="paragraph paragraph-17"><em>Avinash Dixit&#x2019;s &#x201C;<a href="http://www.sscnet.ucla.edu/polisci/faculty/chwe/austen/dixit2005.pdf">Restoring Fun to Game Theory</a>&#x201D; includes a longer discussion of the theory behind the &#x201C;battle of wits&#x201D; in &#x201C;The Princess Bride.&#x201D;</em></p>
+                          </div> -->
+                          <div id="g-note">*Going in against a Sicilian when death is on the line is a fine thing to do as long as you’ve spent years developing an immunity to iocaine powder.</div>
+                       </div>
+                   </div>
+               </div>
+    <script>
+    var NYTG_ASSETS = "https://static01.nyt.com/newsgraphics/2015/07/27/number-puzzle/dfa6f3579ad9a36d38c316aa90f0c1e8e4b65727/",
+        NYTG_BIG_ASSETS = "https://static01.nyt.com/newsgraphics/2015/07/27/number-puzzle/assets/",
+        _gaq = _gaq || [];
+    require(['foundation/main'], function() {
+        require(["build.js"]); // generated from src/script.js
+    });
+    </script>
+    <!-- Pipeline: 2015-07-27-number-puzzle | August 13, 2015, 05:36PM | dfa6f3579ad9a36d38c316aa90f0c1e8e4b65727 -->
+    </div>
+
+    </article>
+    </main>
+    </div>
+    </div>
+    <script>
+    require(['foundation/main'], function() {
+        require(['interactive/main']);
+        require(['jquery/nyt', 'foundation/views/page-manager'], function($, pageManager) {
+            if (window.location.search.indexOf('disable_tagx') > 0) {
+                return;
+            }
+            $(document).ready(function() {
+                require(['https://a1.nyt.com/analytics/json-kidd.min.js'], function() {
+                    pageManager.trackingFireEventQueue();
+                });
+            });
+        });
+    });
+    </script>
+    <script>
+    (function(w, d) {
+        try {
+            if (w && w.parent && w.parent.location.search.match(/disableIframeResize/)) {
+                return;
+            }
+        } catch (error) {
+            // window.parent is not available
+        }
+
+        // scoped state
+        var MutationObserver = w.MutationObserver || w.WebKitMutationObserver || w.MozMutationObserver;
+        var hasResized = false;
+        var resizeFallbackDelay = 1500;
+        var resizeInterval = 3000;
+        var interactive = {
+            id: '100000003846718',
+            slug: 'are-you-smarter-than-other-new-york-times-readers',
+        };
+        var resizeIntervalId;
+        // vanilla JS $(document).ready()
+        function ready(fn) {
+            if (d.readyState != 'loading') {
+                fn();
+            } else {
+                d.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+        // send resize message to parent
+        function sendResizeMessage(opts) {
+            if (!(w.parent && w.parent.postMessage)) { return; }
+            var rect, width, height, message;
+            rect = d.documentElement.getBoundingClientRect();
+            width = Math.ceil(rect.width);
+            height = Math.ceil(rect.height);
+            message = {
+                type: 'resize',
+                id: interactive.id,
+                width: width,
+                height: height
+            };
+            w.parent.postMessage(message, '*');
+            // don't update hasResized if this message was forced
+            if (opts && opts.forced) { return; }
+            hasResized = true;
+        }
+        // send message to parent to indicate that this interactive is listening for messages
+        function sendListeningMessage() {
+            if (!(w.parent && w.parent.postMessage)) { return; }
+            var message = {
+                type: 'listening',
+                id: interactive.id,
+            };
+            w.parent.postMessage(message, '*');
+        }
+        // observe mutations to the interactive graphics node and send resize message
+        function initializeMutationObservers() {
+            if (!MutationObserver) { return; }
+
+            // select the target node
+            var target = d.getElementById(interactive.slug);
+            if (!target) { return; }
+            // create an observer instance
+            var observer = new MutationObserver(sendResizeMessage.bind(null, null));
+            // configuration of the observer
+            var config = {
+                attributes: true,
+                childList: true,
+                characterData: true,
+                subtree: true,
+            };
+            // pass in the target node, as well as the observer options
+            observer.observe(target, config);
+        }
+        // update theme in response to message from parent
+        function updateTheme(previous, current) {
+            var root = d.documentElement;
+            if (!(previous && current && root)) { return; }
+            root.classList.remove(previous);
+            root.classList.add(current);
+        }
+        // handle messages from parent
+        function onMessage(event) {
+            var data = event.data;
+            var type = data.type;
+            if (type === 'themechange') {
+                if (data.previous && data.current) {
+                    updateTheme(data.previous, data.current);
+                }
+            }
+        }
+        // hook into the resizedcontent event that some embedded interactives dispatch
+        function attachEventListeners() {
+            d.documentElement.addEventListener('resizedcontent', sendResizeMessage.bind(null, null));
+        }
+        // always resize at least once
+        // @see https://a1.nyt.com/assets/interactive/20170123-034410/js/shared/interactive/views/app-communicator.js
+        function initializeResizeFallback() {
+            if (!hasResized) {
+                setTimeout(sendResizeMessage.bind(null, null), resizeFallbackDelay);
+            }
+        }
+        // try to resize every resizeInterval ms
+        function initializeResizeInterval() {
+            return setInterval(sendResizeMessage.bind(null, { forced: true }), resizeInterval);
+        }
+        // initialize the interactive if it has been embedded
+        function init() {
+            if (w.parent) {
+                sendResizeMessage({ forced: true });
+                attachEventListeners();
+                initializeMutationObservers();
+                initializeResizeFallback();
+                resizeIntervalId = initializeResizeInterval();
+            }
+        }
+        // initialization that should occur before DOMContentLoaded
+        function preReady() {
+            if (w.parent) {
+                w.addEventListener('load', sendResizeMessage.bind(null, { forced: true }));
+                w.addEventListener('message', onMessage, false);
+                sendListeningMessage();
+                w.addEventListener('unload', function() { if (resizeIntervalId) { clearInterval(resizeIntervalId); } });
+            }
+        }
+        preReady();
+        ready(init);
+    })(window, document);
+    </script>
+    <script>
+    (function() {
+        var isBadSafari = (function() {
+            var ua = navigator.userAgent;
+            if (!/.*(iphone|ipad|ipod|silk).*$/i.test(ua)) {
+                var match = /Mac\ OS\ X\ (\d+)[_\.](\d+)([_\.](\d+))?/.exec(ua);
+                if (match && match.length >= 5) {
+                    var maj = parseInt(match[1], 10);
+                    return (maj < 10 || (maj === 10 && parseInt(match[2], 10) <= 9)) ? 1 : 0;
+                }
+            }
+            return 0;
+        })();
+        if (!isBadSafari) {
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = 'https://tags.bluekai.com/site/50550?ret=js&limit=1';
+            if (!/NYT-T=out/.test(document.cookie)) {
+                document.getElementsByTagName('script')[0].appendChild(s);
+            }
+        }
+    })();
+    </script>
+</body>
+
+</html>
