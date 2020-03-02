@@ -295,7 +295,7 @@ html #reactContainer {
 }
 #g-input {
   margin-top: 30px;
-  height: 60px;
+  /* height: 60px; */
 }
 .g-subhed {
   font-family: nyt-franklin;
@@ -457,9 +457,11 @@ blockquote {
 </head>
 
 <body>
+     <h1>Electoral College Game</h1>
     <div class="g-graphic">
         <div class="g-top-section">
-            <h1>Electoral College Game</h1>
+             <div class="g-fixie g-illustration g-select-container"></div>
+             <div class="g-select-wrap"></div>
             <div class="g-instructions-panel">
                 <p>Your mission is to out-campaign your opponent, who is competing against you to be President.</p>
                 <p>Imagine that there are seven competitive states in the <strong>NOTUSISTAN</strong> Electoral College used for its presidential elections, operating under the same winner take all, weighted voting rules as in the US Electoral College.</p>
@@ -469,6 +471,8 @@ blockquote {
                 <p><strong>Ties in each state are decided by coin toss</strong>. There is no requirement to allocate any money in a state, or you can allocate up to the full allotment in just one state.</p>
                 <p>You compete against one other person, randomly selected from our database. The goal is to win 70 EC votes or more so you become President. </p>
                 <p>When you’re ready, <strong>enter your allotments below</strong>. (You can play as many times as you like, but only your first guess will count.)</p>
+
+
                 <div id="g-input">
                     <table width="50%" border="0">
                         <tbody>
@@ -537,39 +541,67 @@ blockquote {
 
                        </div>
                    </div>
-                    <div class="g-bottom-section g-hidden">
-                       <h2 class="g-histogram-title"></h2>
-                       <div class="g-histogram-subtitle">Percent of readers picking each number:</div>
-                       <div class="g-histogram"></div>
-                       <div class="g-bottom-copy-container">
-<!--                           <div class="g-user-custom-response"></div>
-                          <div class="g-general-copy">
-                               <h3 class="g-matters-hed g-subhed">More than just picking numbers</h3>
-                               <p class="paragraph paragraph-1">This game is a classic one for many psychologists, game theorists and behavioral economists because it highlights the trouble that most people have in thinking more than one or two steps ahead.</p>
-                               <p class="paragraph paragraph-2">Many people may start by realizing that 50 would be roughly the average answer if everyone picked a random number &#x2014; and then calculating that 33 is two-thirds of 50. But if everyone picked 33, then 22 would be the winning answer. So many people go one step beyond the obvious and give answers around 20 &#x2014; or they somehow land there intuitively.</p>
-                               <p class="paragraph paragraph-3">The question is why more people don&#x2019;t keep going and say: Well, 15 is about two-thirds of 22, and 10 is two-thirds of 15 &#x2026; and on and on. Eventually, we&#x2019;ll get to zero, so that&#x2019;s what I&#x2019;ll say.</p>
-                               <p class="paragraph paragraph-4">An answer of zero would be what&#x2019;s known as the <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash equilibrium</a> of this game: the answer people would give after knowing the other players&#x2019; answers and being given infinite opportunities to change their own. In a world of hyper-rationality, the answer to this game would be the Nash equilibrium. Or as Richard Thaler, a founder of behavioral economics, wrote in &#x201C;<a href="http://www.misbehavingbook.org/">Misbehaving</a>,&#x201D; his recent memoir: &#x201C;The Nash equilibrium in this game is a number that if everyone guessed it, no one would want to change their guess.&#x201D;</p>
-                               <p class="paragraph paragraph-5">Instead of reaching this equilibrium, people instead display what the economist Colin Camerer <a href="http://people.hss.caltech.edu/~camerer/Ch08Pg_119-179.pdf">has called</a> &#x201C;k-step thinking.&#x201D;</p>
-                               <p class="paragraph paragraph-6">You may be familiar with k-step thinking even if you&#x2019;ve never heard the term before &#x2014; from the 1987 film &#x201C;<a title="Princess Bride" href="http://www.imdb.com/title/tt0093779/">The Princess Bride</a>.&#x201D; The hero, Westley, challenges the villain Vizzini to a battle of wits: Westley will put a deadly dose of &#x201C;iocaine&#x201D; poison in one of two cups of wine, placing one cup in front of each man, but concealing which one is where. Vizzini must decide whether to choose the one in front of him, or the one in front of Westley &#x2014; and Westley will drink from the other. To win the battle of wits, Vizzini <a href="http://www.imdb.com/video/screenplay/vi2854659097?ref_=ttvi_vi_imdb_2">must guess</a> whether Westley would knowingly put a poisoned cup in front of himself. Here&#x2019;s just one of Vizzini&#x2019;s lines of reasoning:</p>
-                               <blockquote>
-                                   <p>Iocaine comes from Australia, as everyone knows. And Australia is entirely peopled with criminals. And criminals are used to having people not trust them, as you are not trusted by me. So I can clearly not choose the wine in front of you.</p>
-                               </blockquote>
-                               <p class="paragraph paragraph-7">Eventually, Vizzini drinks from the poisoned cup and dies. (In truth, Westley had poisoned both cups.<customspan class="g-smallcaps">*</customspan>)</p>
-                               <p class="paragraph paragraph-8">In our game, someone who guessed randomly is a 0-step thinker. Mr. Camerer, Teck-Hua Ho and Juin-Kuan Chong <a title="zero-step" href="http://people.hss.caltech.edu/~camerer/Ch08Pg_119-179.pdf">say</a> these guessers are &#x201C;fatigued, clueless, overwhelmed, uncooperative, or simply more willing to make a random guess in the first period of a game and learn from subsequent experience than to think hard before learning.&#x201D; If you were not one of the random guessers, if you made some effort to imagine what other players might do, you probably believed other players used one fewer step than you did.</p>
-                               <p class="paragraph paragraph-9">For most people, k is a small number: one, two, three or four. It&#x2019;s just not natural for most of us to think multiple steps ahead.</p>
-                               <p class="paragraph paragraph-10">Examples abound in everyday life. Many people believe that it&#x2019;s better to sell a house in the spring, for example, because more buyers are looking then. But what really matters is the ratio between buyers and sellers. You&#x2019;d rather sell your house when your town has 20 buyers and only 2 sellers than when it has 100 buyers and 500 sellers.</p>
-                               <p class="paragraph paragraph-11">In a highly networked world, these calculations become all the more important. If Uber fares are surging downtown, Uber drivers who happen to be uptown need to think about whether prices will still be surging by the time they can get downtown. People using an online dating site need to think about the desires of their potential mates &#x2014; and the strategies that the competition is using.</p>
-                               <p class="paragraph paragraph-12">But the best example is probably the stock market. As John Maynard Keynes noted, the goal in the stock market is not necessarily to pick the best company. It is to pick the company that others think will be the best company. In fact, it is to pick the company that others think that others think that others think &#x2014; and so on &#x2014; is the best company. He used a &#x201C;beauty contest&#x201D; to describe this idea, after a fictional newspaper contest in which readers had to guess the most beautiful face from a gallery of faces.</p>
-                               <p class="paragraph paragraph-13">In the stock market &#x2014; or the housing market, for that matter &#x2014; people often struggle to think more than one or two steps ahead. That&#x2019;s a big reason that bubbles can form. It was true that a lot of dot-com companies from the 1990s were on to something new and important, just as it was true that housing prices rarely fall. But if everybody else decides that dot-com stocks and houses are a great investment, a problem can easily develop. The prices of those assets can rise so high that they&#x2019;re no longer a good value.</p>
-                               <p class="paragraph paragraph-14">The initial instinct wasn&#x2019;t wrong. The failure to think ahead was the error.</p>
-                               <p class="paragraph paragraph-15">It&#x2019;s a weakness we all have. The best way to combat it is to be aware of it &#x2014; and push back against it.</p>
-                               <p class="paragraph paragraph-16"><em>We want to thank Christopher Nguyen, the chief executive of <a href="http://adatao.com/">Adatao</a>, a data-intelligence company, who originally gave us the idea for this game. We also want to note that The Financial Times ran versions of the game for its subscribers both in 1997 and <a href="http://www.ft.com/intl/cms/s/0/6149527a-25b8-11e5-bd83-71cb60e8f08c.html">this year</a>. In the first version, the winning answer was 13; more recently, it was 12.</em></p>
-                               <p class="paragraph paragraph-17"><em>Avinash Dixit&#x2019;s &#x201C;<a href="http://www.sscnet.ucla.edu/polisci/faculty/chwe/austen/dixit2005.pdf">Restoring Fun to Game Theory</a>&#x201D; includes a longer discussion of the theory behind the &#x201C;battle of wits&#x201D; in &#x201C;The Princess Bride.&#x201D;</em></p>
-                          </div> -->
-                          <div id="g-note">*Going in against a Sicilian when death is on the line is a fine thing to do as long as you’ve spent years developing an immunity to iocaine powder.</div>
-                       </div>
-                   </div>
-               </div>
+
+
+                   <div class="g-bottom-section g-hidden">
+              		<h2 class="g-histogram-title"></h2>
+              		<div class="g-histogram-subtitle">Percent of readers picking each number:</div>
+              		<div class="g-histogram"></div>
+
+              		<div class="g-bottom-copy-container">
+              			<div class="g-user-custom-response"></div>
+
+              			<div class="g-general-copy">
+              				<h3 class="g-matters-hed g-subhed">More than just picking numbers</h3>
+
+<p class="paragraph paragraph-1">This game is a classic one for many psychologists, game theorists and behavioral economists because it highlights the trouble that most people have in thinking more than one or two steps ahead.</p>
+
+<p class="paragraph paragraph-2">Many people may start by realizing that 50 would be roughly the average answer if everyone picked a random number — and then calculating that 33 is two-thirds of 50. But if everyone picked 33, then 22 would be the winning answer. So many people go one step beyond the obvious and give answers around 20 — or they somehow land there intuitively.</p>
+
+<p class="paragraph paragraph-3">The question is why more people don’t keep going and say: Well, 15 is about two-thirds of 22, and 10 is two-thirds of 15 … and on and on. Eventually, we’ll get to zero, so that’s what I’ll say.</p>
+
+<p class="paragraph paragraph-4">An answer of zero would be what’s known as the <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash equilibrium</a> of this game: the answer people would give after knowing the other players’ answers and being given infinite opportunities to change their own. In a world of hyper-rationality, the answer to this game would be the Nash equilibrium. Or as Richard Thaler, a founder of behavioral economics, wrote in “<a href="http://www.misbehavingbook.org/">Misbehaving</a>,” his recent memoir: “The Nash equilibrium in this game is a number that if everyone guessed it, no one would want to change their guess.”</p>
+
+<p class="paragraph paragraph-5">Instead of reaching this equilibrium, people instead display what the economist Colin Camerer <a href="http://people.hss.caltech.edu/~camerer/Ch08Pg_119-179.pdf">has called</a> “k-step thinking.”</p>
+
+<p class="paragraph paragraph-6">You may be familiar with k-step thinking even if you’ve never heard the term before — from the 1987 film “<a title="Princess Bride" href="http://www.imdb.com/title/tt0093779/">The Princess Bride</a>.” The hero, Westley, challenges the villain Vizzini to a battle of wits: Westley will put a deadly dose of “iocaine” poison in one of two cups of wine, placing one cup in front of each man, but concealing which one is where. Vizzini must decide whether to choose the one in front of him, or the one in front of Westley — and Westley will drink from the other. To win the battle of wits, Vizzini <a href="http://www.imdb.com/video/screenplay/vi2854659097?ref_=ttvi_vi_imdb_2">must guess</a> whether Westley would knowingly put a poisoned cup in front of himself. Here’s just one of Vizzini’s lines of reasoning:</p>
+
+<blockquote> <p>Iocaine comes from Australia, as everyone knows. And Australia is entirely peopled with criminals. And criminals are used to having people not trust them, as you are not trusted by me. So I can clearly not choose the wine in front of you.</p> </blockquote>
+
+<p class="paragraph paragraph-7">Eventually, Vizzini drinks from the poisoned cup and dies. (In truth, Westley had poisoned both cups.<customspan class="g-smallcaps"><a href="https://www.nytimes.com/interactive/2015/08/13/upshot/are-you-smarter-than-other-new-york-times-readers.html#g-note">*</a></customspan>)</p>
+
+<p class="paragraph paragraph-8">In our game, someone who guessed randomly is a 0-step thinker. Mr. Camerer, Teck-Hua Ho and Juin-Kuan Chong <a title="zero-step" href="http://people.hss.caltech.edu/~camerer/Ch08Pg_119-179.pdf">say</a> these guessers are “fatigued, clueless, overwhelmed, uncooperative, or simply more willing to make a random guess in the first period of a game and learn from subsequent experience than to think hard before learning.” If you were not one of the random guessers, if you made some effort to imagine what other players might do, you probably believed other players used one fewer step than you did.</p>
+
+<p class="paragraph paragraph-9">For most people, k is a small number: one, two, three or four. It’s just not natural for most of us to think multiple steps ahead.</p>
+
+<p class="paragraph paragraph-10">Examples abound in everyday life. Many people believe that it’s better to sell a house in the spring, for example, because more buyers are looking then. But what really matters is the ratio between buyers and sellers. You’d rather sell your house when your town has 20 buyers and only 2 sellers than when it has 100 buyers and 500 sellers.</p>
+
+<p class="paragraph paragraph-11">In a highly networked world, these calculations become all the more important. If Uber fares are surging downtown, Uber drivers who happen to be uptown need to think about whether prices will still be surging by the time they can get downtown. People using an online dating site need to think about the desires of their potential mates — and the strategies that the competition is using.</p>
+
+<p class="paragraph paragraph-12">But the best example is probably the stock market. As John Maynard Keynes noted, the goal in the stock market is not necessarily to pick the best company. It is to pick the company that others think will be the best company. In fact, it is to pick the company that others think that others think that others think — and so on — is the best company. He used a “beauty contest” to describe this idea, after a fictional newspaper contest in which readers had to guess the most beautiful face from a gallery of faces.</p>
+
+<p class="paragraph paragraph-13">In the stock market — or the housing market, for that matter — people often struggle to think more than one or two steps ahead. That’s a big reason that bubbles can form. It was true that a lot of dot-com companies from the 1990s were on to something new and important, just as it was true that housing prices rarely fall. But if everybody else decides that dot-com stocks and houses are a great investment, a problem can easily develop. The prices of those assets can rise so high that they’re no longer a good value.</p>
+
+<p class="paragraph paragraph-14">The initial instinct wasn’t wrong. The failure to think ahead was the error.</p>
+
+<p class="paragraph paragraph-15">It’s a weakness we all have. The best way to combat it is to be aware of it — and push back against it.</p>
+
+<p class="paragraph paragraph-16"><em>We want to thank Christopher Nguyen, the chief executive of <a href="http://adatao.com/">Adatao</a>, a data-intelligence company, who originally gave us the idea for this game. We also want to note that The Financial Times ran versions of the game for its subscribers both in 1997 and <a href="http://www.ft.com/intl/cms/s/0/6149527a-25b8-11e5-bd83-71cb60e8f08c.html">this year</a>. In the first version, the winning answer was 13; more recently, it was 12.</em></p>
+
+<p class="paragraph paragraph-17"><em>Avinash Dixit’s “<a href="http://www.sscnet.ucla.edu/polisci/faculty/chwe/austen/dixit2005.pdf">Restoring Fun to Game Theory</a>” includes a longer discussion of the theory behind the “battle of wits” in “The Princess Bride.”</em></p>
+
+
+</div>
+<div id="g-note">*Going in against a Sicilian when death is on the line is a fine thing to  do as long as you’ve spent years developing an immunity to iocaine powder.</div>
+
+</div>
+
+</div>
+
+
+
+</div>
+
     <script>
     var NYTG_ASSETS = "https://static01.nyt.com/newsgraphics/2015/07/27/number-puzzle/dfa6f3579ad9a36d38c316aa90f0c1e8e4b65727/",
         NYTG_BIG_ASSETS = "https://static01.nyt.com/newsgraphics/2015/07/27/number-puzzle/assets/",

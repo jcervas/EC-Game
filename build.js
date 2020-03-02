@@ -110,14 +110,14 @@ define('amanda',['d3/3'], function(d3) {
                     "You were very close. Well done!",
                     "Pretty good!",
                     "Not the worst!",
-                    "Sorry, you werenâ€™t very close.",
-                    "Unfortunately, someone has to lose, and itâ€™s you."
+                    "Sorry, you weren't very close.",
+                    "Unfortunately, someone has to lose, and it's you."
             ]);
 
 
         var allUserLength = d3.sum(everyone, function(d) { return d.adjFreq; });
 
-        if (user === 0) histTitle.text("What a beautiful mind you have! (You didnâ€™t win, though.)");
+        if (user === 0) histTitle.text("What a beautiful mind you have! (You didn't win, though.)");
         else {
             histTitle.text(hedScale(dif));
         }
@@ -134,7 +134,7 @@ define('amanda',['d3/3'], function(d3) {
             everyone.filter(function(d) { return d.guess >= 67; })
             .map(function(d) { return d.pct; })
             ));
-//And you werenâ€™t far off from reality if you made that assumption.
+//And you weren't far off from reality if you made that assumption.
 
         var newTotals = d3.round((2/3)*d3.mean(totals.filter(function(d){ return d <= 67; })));
 
@@ -143,14 +143,14 @@ define('amanda',['d3/3'], function(d3) {
             "withinTwo": "<p>You were extremely close. So far, the average of all numbers has been " + avg + ", which means two-thirds of the average is " + winner + " and your entry of "+user+" is close to the mark. Your guess, while not a winner, was better than those of "+ pctile +" percent of all readers. Take a bow.</p>",
             "withinFive": "<p>So far, the average of all numbers has been " +avg + ", which means two-thirds of the average is "+winner+" and your entry of "+user+" is within five of the mark. Though not the winning entry, it's still closer than about "+pctile+" percent of other readers.</p>",
             "within10": "<p>Not bad â€“ but you're not quite one of the winners.  So far, the average of all numbers has been "+avg+", which means two-thirds of the average is "+winner+". About "+d3.round(100 - pctile)+" percent of readers guessed closer than you.</p>",
-            "notClose": "<p>Your guess of " + user +  " is well off the mark of " + winner + ", the number representing two-thirds of the average of " + allReadersNice + " readersâ€™ guesses (including yours). You didnâ€™t win, but you do get a consolation prize: 850 words about human psychology and behavioral economics explaining the error of your ways.</p>",
-            "prankster": "<p>On top of that, we have to ask â€“ why pick " + user + "? Are you some kind of math prankster? Itâ€™s possible you misunderstood the question (if so, we apologize). But think about it: " + user + " can never be two-thirds of the average of everyoneâ€™s guesses. Even if everyone guessed 100, the average, once rounded, would be 67.</p><p>Still, there are interesting things to consider with an entry like this. Specifically, how many <em>other people</em> predicted that there would be people like you and increased their guess accordingly? As you can see from the histogram above, you're not alone. About 1 in "+1/(pranksterPct/100)+" readers so far are math pranksters like you. Without them, the winning response would have been "+ newTotals + " instead of " + winner + ".",
+            "notClose": "<p>Your guess of " + user +  " is well off the mark of " + winner + ", the number representing two-thirds of the average of " + allReadersNice + " readers' guesses (including yours). You didn't win, but you do get a consolation prize: 850 words about human psychology and behavioral economics explaining the error of your ways.</p>",
+            "prankster": "<p>On top of that, we have to ask â€“ why pick " + user + "? Are you some kind of math prankster? It's possible you misunderstood the question (if so, we apologize). But think about it: " + user + " can never be two-thirds of the average of everyone's guesses. Even if everyone guessed 100, the average, once rounded, would be 67.</p><p>Still, there are interesting things to consider with an entry like this. Specifically, how many <em>other people</em> predicted that there would be people like you and increased their guess accordingly? As you can see from the histogram above, you're not alone. About 1 in "+1/(pranksterPct/100)+" readers so far are math pranksters like you. Without them, the winning response would have been "+ newTotals + " instead of " + winner + ".",
             "guessed33": "<p>Your guess is particularly interesting to economists and game theorists alike. If everyone else basically picked randomly, the average would be 50; your guess represents two-thirds of that. This is an example of what the economist Colin Camerer has called â€œk-stepâ€ thinking (more on that in a minute).</p><p>For you, k is 1: you are thinking one step ahead.</p>",
             "guessed22": "<p>Your guess is particularly interesting to economists and game theorists alike. If everyone else basically picked randomly, the average would be 50; two-thirds of that is 33. And your guess, "+user+", represents two-thirds of <em>that</em>. This is an example of what the economist Colin Camerer has called â€œk-stepâ€ thinking (more on that in a minute). For you, k is 2: you are thinking two steps ahead.</p>",
             "guessed15": "<p>Your guess is particularly interesting to economists and game theorists alike. It represents what the economist Colin Camerer has called â€œk-stepâ€ thinking (more on that in a minute). For you, k is 3: You are thinking three steps ahead. Suppose everyone guesses randomly, producing an average answer of 50. A first-level thinker would guess 33 â€“ two-thirds of 50. A second-level thinker, knowing many people would guess 33, would pick 22 â€“ two-thirds of 33. A third-level thinker, like you, would guess 15 â€“ two-thirds of 22. Obviously, this line of thinking goes on and on.</p><p>Your guess suggests you thought three steps ahead â€“ or maybe you thought all the way ahead but assumed that the average other contestant was thinking only two steps ahead. Let us explain:",
-            "guessed66": "Well, this is an interesting choice. Unfortunately for you, itâ€™s also an incorrect one. By definition, your guess of " + user +" means you think all other users would guess 99 or 100 â€” which, of course, would mean they were all badly wrong, since the average could never be higher than 67 (after rounding).",
-            "nash": "<p>Your choice, " + user + ", didnâ€™t win, but it suggests you have something in common with John Nash, the great mathematician for whom the Nash equilibrium is named (more on that below) and was the subject of a book and movie, â€œA Beautiful Mind.â€</p><p>Your answer means you took this problem to its logical conclusion. Unfortunately for you, most other players did not, which means you only did better than about " + d3.round(pctile) + " percent of players. But weâ€™re still impressed. Let us explain:</p>",
-            "guessedAverage": "<p>But your guess is interesting because it represents the average of everyone elseâ€™s guess (instead of two-thirds of the average, which was our goal). Wrap your brain around this: The current winner of this puzzle based his or her answer by thinking that, on average, other people would guess like you.</p>"
+            "guessed66": "Well, this is an interesting choice. Unfortunately for you, it's also an incorrect one. By definition, your guess of " + user +" means you think all other users would guess 99 or 100 â€” which, of course, would mean they were all badly wrong, since the average could never be higher than 67 (after rounding).",
+            "nash": "<p>Your choice, " + user + ", didn't win, but it suggests you have something in common with John Nash, the great mathematician for whom the Nash equilibrium is named (more on that below) and was the subject of a book and movie, â€œA Beautiful Mind.â€</p><p>Your answer means you took this problem to its logical conclusion. Unfortunately for you, most other players did not, which means you only did better than about " + d3.round(pctile) + " percent of players. But we're still impressed. Let us explain:</p>",
+            "guessedAverage": "<p>But your guess is interesting because it represents the average of everyone else's guess (instead of two-thirds of the average, which was our goal). Wrap your brain around this: The current winner of this puzzle based his or her answer by thinking that, on average, other people would guess like you.</p>"
         };
 
 
@@ -708,7 +708,7 @@ console.log(userData)
                 .attr("class", "g-x-axis-label")
                 .attr("x", width)
                 .attr("y", height + margin.bottom - 5)
-                .text("Readersâ€™ guesses â†’");
+                .text("Readers' guesses");
 
             renderFeedbackTable();
 
