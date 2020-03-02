@@ -277,7 +277,37 @@ require([
     queue()
         .defer(d3.tsv, NYTG_ASSETS + "starter.tsv")
         .defer(d3.json, userResultsUrl)
-        .await(ready);
+        // .await(ready);
+
+      d3.json(userResultsUrl, function(data) {
+       console.log(data);
+               const totalPlayers =
+               d3.nest()
+               .key(d => d.round)
+               .rollup(d => d.length)
+               .entries(data);
+
+               console.log(JSON.stringify(totalPlayers))
+
+               var totals =
+               d3.nest()
+                 .key(function(d) { return d.round; })
+                 .rollup(function(values) {
+                   return {
+                     A: d3.mean(values, function(d) { return d.A }),
+                     B: d3.mean(values, function(d) { return d.B }),
+                     C: d3.mean(values, function(d) { return d.C }),
+                     D: d3.mean(values, function(d) { return d.D }),
+                     E: d3.mean(values, function(d) { return d.E }),
+                     F: d3.mean(values, function(d) { return d.F }),
+                     G: d3.mean(values, function(d) { return d.G })
+                };
+              })
+              .map(data);
+
+console.log(totals)
+
+   });
 
 
     var a = generateQAPairs(".g-option-1", ".g-answer-1", 30,80);
@@ -335,8 +365,10 @@ require([
 
     function ready(err, seedData, userData) {
         if (err) console.warn(err);
-console.log(countByState(userData))
+
+
 console.log(userData)
+
         function countByState(data) {
             return d3.nest()
                 .key(function(d) { return d.round; })
