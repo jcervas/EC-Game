@@ -277,7 +277,7 @@ require([
     queue()
         .defer(d3.tsv, NYTG_ASSETS + "starter.tsv")
         .defer(d3.json, userResultsUrl)
-        // .await(ready);
+        .await(ready);
 
       d3.json(userResultsUrl, function(data) {
        console.log(data);
