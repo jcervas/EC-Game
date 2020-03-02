@@ -1,0 +1,441 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"> -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+         <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://underscorejs.org/underscore-min.js"></script>
+</head>
+<style>
+    .g-input-notice {
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 9px;
+  color: #AA66D3;
+}
+#g-input {
+  margin-top: 30px;
+  /* height: 60px; */
+}
+.g-hidden {
+  display: none;
+}
+.g-graphic {
+  font-family: nyt-franklin;
+  font-size: 12px;
+  font-weight: 300;
+  width: 100%;
+  position: relative;
+  margin-bottom: 300px;
+}
+.g-graphic table {
+  text-align: center;
+}
+.g-instructions-panel p {
+  font-family: nyt-franklin;
+  margin: 12px 0;
+  font-weight: 300;
+}
+.g-overall-instructions {
+  margin-bottom: 25px;
+}
+.g-top-section p {
+  font-size: 17px;
+  line-height: 1.4em;
+}
+.g-input-notice {
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 9px;
+  color: #AA66D3;
+}
+button,
+input {
+  padding: 5px 8px;
+  margin-right: 3px;
+  font-family: 'nyt-franklin', helvetica, arial, sans-serif;
+  font-size: 13px;
+  border: none;
+  border-radius: 3px;
+  border: 1px solid #777;
+}
+button.g-submit {
+  cursor: pointer;
+  background: #16212B;
+  border-color: #16212B;
+  color: #fff;
+}
+button.g-submit:disabled,
+button.g-submit.g-disabled {
+  background: #999;
+  border-color: #999;
+}
+.g-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+button:disabled {
+  /*background: #dedede;*/
+  opacity: .5;
+  pointer-events: none;
+}
+input {
+  color: #666;
+  border: 1px solid #ddd;
+  background: #fff;
+  text-align: center;
+}
+.g-input-notice {
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 9px;
+  color: #AA66D3;
+}
+.g-select-container {
+  font-family: nyt-franklin;
+  font-weight: 300;
+  position: absolute;
+  left: 100%;
+  display: none;
+}
+#g-note {
+  font-weight: 300;
+  font-size: 13px;
+  color: #999;
+  line-height: 1.3em;
+}
+blockquote p {
+  color: #777;
+}
+blockquote {
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+</style>
+
+<body>
+    <h1>Electoral College Game</h1>
+    <div class="g-graphic">
+        <div class="g-top-section">
+            <div class="g-fixie g-illustration g-select-container"></div>
+            <div class="g-select-wrap"></div>
+            <div class="g-instructions-panel">
+                <p>Your mission is to out-campaign your opponent, who is competing against you to be President.</p>
+                <p>Imagine that there are seven competitive states in the <strong>NOTUSISTAN</strong> Electoral College used for its presidential elections, operating under the same winner take all, weighted voting rules as in the US Electoral
+                    College.</p>
+                <p>Each player has <strong>$100</strong> to spend across the seven states, in increments of <strong>$1</strong> (No decimals or fractions in your numbers are allowed). By directing resources to states, you get a competitive
+                    advantage.
+                    For every $1 additional spent in a state, you gain an additional 1 percentage point in vote share. For every additional $1 spent by your opponent, you lose 1 percentage point (whoever spends the most money in the state, wins
+                    that
+                    state).</p>
+                <p>For example, if you allocate $<span class="g-option-1"></span> to <em>State <span class="g-state-1"></span></em>, and your opponent only allocated $<span class="g-answer-1"></span>, you win <em>State <span class="g-state-1a"></span>'s</em>
+                    <span class="g-ev-1"></span> EC votes. If instead you allocated $<span class="g-option-2"></span> to <em>State <span class="g-state-2"></span></em>, your opponent would win <span class="g-ev-2"></span> EC votes by allocating
+                    anything between $<span class="g-answer-3"></span> and $100.</p>
+                <p>The seven states have Electors shown in the second column. There is a total of 139 EC votes, with <strong>70 needed to win</strong>.</p>
+                <p><strong>Ties in each state are decided by coin toss</strong>. There is no requirement to allocate any money in a state, or you can allocate up to the full allotment in just one state.</p>
+                <p>You compete against one other person, randomly selected from our database. The goal is to win 70 EC votes or more so you become President. </p>
+                <p>When you’re ready, <strong>enter your allotments below</strong>. (You can play as many times as you like, but only your first guess will count.)</p>
+                <div id="g-input">
+                    <table width="50%" border="0">
+                        <tbody>
+                            <tr>
+                                <th scope="col">State</th>
+                                <th scope="col">EC Votes</th>
+                                <th scope="col">Initial Vote Share</th>
+                                <th scope="col">Allocation</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">A</th>
+                                <td>3</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputA" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">B</th>
+                                <td>5</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputB" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">C</th>
+                                <td>8</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputC" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">D</th>
+                                <td>13</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputD" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">E</th>
+                                <td>21</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputE" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">F</th>
+                                <td>34</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputF" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">G</th>
+                                <td>55</td>
+                                <td>50%</td>
+                                <td><input id="g-user-submit-inputG" type="tel" class="nytint-textinput g-num"></input></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="3"></th>
+                                <td>
+                                    <div>Total Allocated: $<span class="g-total-allocated">0</span><span id="demo"></span></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="g-submit g-disabled">Submit</button>
+                    <div class="g-input-notice g-rounding-warning g-hidden">This looks like a decimal. Just FYI, we’d round it to <span class="g-decimal-eventual-round"></span>.</div>
+                    <div class="g-input-notice g-out-of-bounds-warning g-hidden">Please enter a number between 0 and 100.</div>
+                    <div class="g-input-notice g-totalHighWarning-warning g-hidden">Please adjust your allocation so it doesn't exceed $100.</div>
+                    <div class="g-input-notice g-totalLowWarning-warning g-hidden">You have not allocated all $100!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    window.$ = $;
+    var userResultsUrl = "results_tmp.json"
+
+    var graphic = d3.select(".g-graphic"),
+        submitButton = d3.select(".g-submit"),
+        bottomSection = d3.select(".g-bottom-section"),
+        inputBox = $('input'),
+        histogramTitle = d3.select(".g-histogram-title"),
+        eventualDecimalRound = d3.select(".g-decimal-eventual-round"),
+        roundingWarning = d3.select(".g-rounding-warning"),
+        outOfBoundsWarning = d3.select('.g-out-of-bounds-warning'),
+        totalHighWarning = d3.select(".g-totalHighWarning-warning"),
+        totalLowWarning = d3.select(".g-totalLowWarning-warning"),
+        totalAlloted = d3.select(".g-total-allocated"),
+        inputA = d3.select("g-user-submit-inputA"),
+        inputB = d3.select("g-user-submit-inputB"),
+        inputC = d3.select("g-user-submit-inputC"),
+        inputD = d3.select("g-user-submit-inputD"),
+        inputE = d3.select("g-user-submit-inputE"),
+        inputF = d3.select("g-user-submit-inputF"),
+        inputG = d3.select("g-user-submit-inputG");        ;
+
+    var a = generateQAPairs(".g-option-1", ".g-answer-1", 30, 80);
+    var b = generateQAPairs(".g-option-2", ".g-answer-2", 0, 49);
+    var c = generateState(".g-state-1", ".g-state-1a", ".g-ev-1");
+    var c2 = generateState(".g-state-2", ".g-state-2a", ".g-ev-2");
+
+    function generateQAPairs(sel1, sel2, floor, ceil) {
+        var dif = ceil - floor,
+            qNum = Math.round(floor + Math.random() * dif),
+            ansMin = qNum + 1
+        ansNum = Math.round(Math.floor(Math.random() * qNum));
+
+        d3.select(sel1).text(qNum);
+        d3.select(sel2).text(ansNum);
+        d3.select(".g-answer-3").text(ansMin);
+        return qNum;
+    }
+
+    function generateState(sel3, sel4, sel5) {
+        var state = "ABCDEFG";
+        var st = state.substr(Math.floor(Math.random() * 7), 1);
+
+        if (st == "A") {
+            ev = 3
+        } else if (st == "B") {
+            ev = 5
+        } else if (st == "C") {
+            ev = 8
+        } else if (st == "D") {
+            ev = 13
+        } else if (st == "E") {
+            ev = 21
+        } else if (st == "F") {
+            ev = 34
+        } else {
+            ev = 55
+        }
+        d3.select(sel3).text(st);
+        d3.select(sel4).text(st);
+        d3.select(sel5).text(ev);
+
+        return st;
+    }
+
+
+    function initializeInputListeners() {
+        inputBox.on('input', function(e) {
+            var isValid = checkInputValidity($(this).val());
+            submitButton.classed('g-disabled', !isValid);
+        });
+
+        inputBox.keyup(function(e) {
+            if (e.keyCode == 13) {
+                var v = Math.round($(this).val());
+                $(this).val(v);
+                var isValid = checkInputValidity(v);
+                if (isValid) showAnswer();
+            }
+        });
+    }
+
+    function checktotalVar(A, B, C, D, E, F, G) {
+        return totalVar = Math.round(Number(A) + Number(B) + Number(C) + Number(D) + Number(E) + Number(F) + Number(G))
+    }
+
+    function checkInputValidity(val) {
+
+        //fire a warning if there are decimals
+        var val2 = val;
+
+        outOfBoundsWarning.classed('g-hidden', val >= 0 && val <= 100);
+
+        // fire a warning if?
+        if ((val2 / Math.floor(val2) !== 1) && (val2 <= 100) && !isNaN(val2 / Math.floor(val2))) {
+            roundingWarning.classed("g-hidden", false);
+            eventualDecimalRound.text(Math.round(val2));
+        } else {
+            roundingWarning.classed("g-hidden", true);
+        }
+
+        var vA = $("#g-user-submit-inputA").val();
+        var vB = $("#g-user-submit-inputB").val();
+        var vC = $("#g-user-submit-inputC").val();
+        var vD = $("#g-user-submit-inputD").val();
+        var vE = $("#g-user-submit-inputE").val();
+        var vF = $("#g-user-submit-inputF").val();
+        var vG = $("#g-user-submit-inputG").val();
+
+        var totalVal = checktotalVar(vA, vB, vC, vD, vE, vF, vG)
+        console.log(totalVar)
+        totalAlloted.text(Math.round(totalVal));
+
+        if (totalVar > 100) {
+            totalHighWarning.classed("g-hidden", false);
+        } else {
+            totalHighWarning.classed("g-hidden", true);
+        }
+
+        if (totalVal < 100) {
+            totalLowWarning.classed("g-hidden", false);
+        } else {
+            totalLowWarning.classed("g-hidden", true);
+        }
+
+        return (!isNaN(val2) && (val2 >= 0) && (val2 <= 100) && val2.toString().indexOf("x") < 0 && (totalVar == 100));
+    }
+
+
+
+    d3.json(userResultsUrl, function(data) {
+        
+        console.log(data);
+        const totalPlayers =
+            d3.nest()
+            .key(d => d.round)
+            .rollup(d => d.length)
+            .entries(data);
+
+        console.log(JSON.stringify(totalPlayers))
+
+        var totals =
+            d3.nest()
+            .key(function(d) { return d.round; })
+            .rollup(function(values) {
+                return {
+                    A: d3.mean(values, function(d) { return d.A }),
+                    B: d3.mean(values, function(d) { return d.B }),
+                    C: d3.mean(values, function(d) { return d.C }),
+                    D: d3.mean(values, function(d) { return d.D }),
+                    E: d3.mean(values, function(d) { return d.E }),
+                    F: d3.mean(values, function(d) { return d.F }),
+                    G: d3.mean(values, function(d) { return d.G })
+                };
+            })
+            .map(data);
+
+        console.log(totals)
+     submitButton.on("click", showAnswer);
+     initializeInputListeners();
+
+
+
+    function showAnswer() {
+
+        //check validity of answer backup
+        var vA = $("#g-user-submit-inputA").val();
+        var vB = $("#g-user-submit-inputB").val();
+        var vC = $("#g-user-submit-inputC").val();
+        var vD = $("#g-user-submit-inputD").val();
+        var vE = $("#g-user-submit-inputE").val();
+        var vF = $("#g-user-submit-inputF").val();
+        var vG = $("#g-user-submit-inputG").val();
+
+        var isValidA = checkInputValidity(vA);
+        var isValidB = checkInputValidity(vB);
+        var isValidC = checkInputValidity(vC);
+        var isValidD = checkInputValidity(vD);
+        var isValidE = checkInputValidity(vE);
+        var isValidF = checkInputValidity(vF);
+        var isValidG = checkInputValidity(vG);
+
+        // var isValidTotal = checkInputTotal(vA,vB,vC,vD,vE,vF,vG)
+
+        if (!isValidA) return;
+        if (!isValidB) return;
+        if (!isValidC) return;
+        if (!isValidD) return;
+        if (!isValidE) return;
+        if (!isValidF) return;
+        if (!isValidG) return;
+
+        // if (!isValidTotal) return;
+
+        //deactivate text input
+        $("#g-user-submit-inputA").blur();
+        $("#g-user-submit-inputB").blur();
+        $("#g-user-submit-inputC").blur();
+        $("#g-user-submit-inputD").blur();
+        $("#g-user-submit-inputE").blur();
+        $("#g-user-submit-inputF").blur();
+        $("#g-user-submit-inputG").blur();
+
+        //turn off the whole input container
+        d3.select("#g-input").classed("g-disabled", true);
+
+        //what was the user's guess?
+        userGuessA = +document.getElementById('g-user-submit-inputA').value;
+        userGuessB = +document.getElementById('g-user-submit-inputB').value;
+        userGuessC = +document.getElementById('g-user-submit-inputC').value;
+        userGuessD = +document.getElementById('g-user-submit-inputD').value;
+        userGuessE = +document.getElementById('g-user-submit-inputE').value;
+        userGuessF = +document.getElementById('g-user-submit-inputF').value;
+        userGuessG = +document.getElementById('g-user-submit-inputG').value;
+
+        var userData = {
+            guessA: userGuessA,
+            guessB: userGuessB,
+            guessC: userGuessC,
+            guessD: userGuessD,
+            guessE: userGuessE,
+            guessF: userGuessF,
+            guessG: userGuessG,
+            mobile: mobile,
+            timePondered: ((new Date()).getTime() - currentTime) / 1000
+        };
+        console.log(userData)
+   };
+});
+    </script>
+</body>
