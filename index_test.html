@@ -146,7 +146,7 @@ blockquote {
                     anything between $<span class="g-answer-3"></span> and $100.</p>
                 <p>The seven states have Electors shown in the second column. There is a total of 139 EC votes, with <strong>70 needed to win</strong>.</p>
                 <p><strong>Ties in each state are decided by coin toss</strong>. There is no requirement to allocate any money in a state, or you can allocate up to the full allotment in just one state.</p>
-                <p>You compete against one other person, randomly selected from our database. The goal is to win 70 EC votes or more so you become President. </p>
+                <p>You compete against one other person, randomly selected from our database of <strong><span class="g-participants"></span></strong> participants. You win only if you exceed 70 EC votes. </p>
                 <p>When you’re ready, <strong>enter your allotments below</strong>. (You can play as many times as you like, but only your first guess will count.)</p>
                 <div id="g-input">
                     <table width="50%" border="0">
@@ -224,6 +224,7 @@ blockquote {
         bottomSection = d3.select(".g-bottom-section"),
         inputBox = $('input'),
         histogramTitle = d3.select(".g-histogram-title"),
+        totalParticipants = d3.select(".g-participants"),
         eventualDecimalRound = d3.select(".g-decimal-eventual-round"),
         roundingWarning = d3.select(".g-rounding-warning"),
         outOfBoundsWarning = d3.select('.g-out-of-bounds-warning'),
@@ -415,7 +416,8 @@ blockquote {
             console.log(data); // Shows all data in the console
 
             var totalPlayers = Object.keys(data).length;
-            console.log(totalPlayers) // Shows the total number of previous participants
+            totalParticipants.text(totalPlayers);
+               console.log(totalPlayers) // Shows the total number of previous participants
 
 
             var means =
