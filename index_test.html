@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"> -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-         <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://underscorejs.org/underscore-min.js"></script>
 </head>
 <style>
@@ -208,7 +208,6 @@ blockquote {
         </div>
     </div>
     <script>
-
     var userResultsUrl = "results_tmp.json"
 
     var graphic = d3.select(".g-graphic"),
@@ -228,7 +227,7 @@ blockquote {
         inputD = document.getElementById("g-user-submit-inputD"),
         inputE = document.getElementById("g-user-submit-inputE"),
         inputF = document.getElementById("g-user-submit-inputF"),
-        inputG = document.getElementById("g-user-submit-inputG");        ;
+        inputG = document.getElementById("g-user-submit-inputG");;
 
     var a = generateQAPairs(".g-option-1", ".g-answer-1", 30, 80);
     var b = generateQAPairs(".g-option-2", ".g-answer-2", 0, 49);
@@ -256,15 +255,15 @@ blockquote {
         var vF = inputF.value;
         var vG = inputG.value;
         totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
-        if (totalVar == 100) {submitButton.classed("g-disabled", false);}
+        if (totalVar == 100) { submitButton.classed("g-disabled", false); }
         return totalVar
     }
 
 
 
     function myFunct() {
-     totalVal = checktotalVar()
-     document.getElementById("g-total-allocated").innerHTML = totalVal;
+        totalVal = checktotalVar()
+        document.getElementById("g-total-allocated").innerHTML = totalVal;
 
     }
 
@@ -294,11 +293,11 @@ blockquote {
         return st;
     }
 
-     submitButton.on("click", showAnswer);
+    submitButton.on("click", showAnswer);
 
 
     function checkInputValidity(val) {
-          totalVal = checktotalVar()
+        totalVal = checktotalVar()
         //fire a warning if there are decimals
         var val2 = val;
 
@@ -334,7 +333,7 @@ blockquote {
     }
 
     function showAnswer() {
-console.log("adf")
+        console.log("adf")
         //check validity of answer backup
         var vA = inputA.value;
         var vB = inputB.value;
@@ -383,7 +382,7 @@ console.log("adf")
         userGuessF = +document.getElementById('g-user-submit-inputF').value;
         userGuessG = +document.getElementById('g-user-submit-inputG').value;
 
-     var currentTime = (new Date()).getTime();
+        var currentTime = (new Date()).getTime();
 
         var userData = {
             A: userGuessA,
@@ -397,49 +396,49 @@ console.log("adf")
             timePondered: ((new Date()).getTime() - currentTime) / 1000
         };
         console.log(userData)
-   };
+    };
 
-// This starts the collection of data from the JSON database
-     d3.json(userResultsUrl)
-          .then(function(data) {
-               // if (error) throw error;
+    // This starts the collection of data from the JSON database
+    d3.json(userResultsUrl)
+        .then(function(data) {
+            // if (error) throw error;
 
-          console.log(data); // Shows all data in the console
+            console.log(data); // Shows all data in the console
 
-        var totalPlayers = Object.keys(data).length;
-          console.log(totalPlayers) // Shows the total number of previous participants
-        
-
-        var means =
-            d3.nest()
-            .key(function(d) { return d.round; })
-            .rollup(function(values) {
-                return {
-                    A: d3.mean(values, function(d) { return d.A }),
-                    B: d3.mean(values, function(d) { return d.B }),
-                    C: d3.mean(values, function(d) { return d.C }),
-                    D: d3.mean(values, function(d) { return d.D }),
-                    E: d3.mean(values, function(d) { return d.E }),
-                    F: d3.mean(values, function(d) { return d.F }),
-                    G: d3.mean(values, function(d) { return d.G })
-                };
-            })
-            .map(data);
-
-        console.log(means) // This is the empirical averages, which will be displayed in a bar chart that compares bars the height of the particpants allocations, and the Banzhaf allocation
+            var totalPlayers = Object.keys(data).length;
+            console.log(totalPlayers) // Shows the total number of previous participants
 
 
-        // TO-DO
-        // Build D3 svg of barchart comparing the participants allocations, the empirical averages, and the Banzhaf 'ideal'
+            var means =
+                d3.nest()
+                .key(function(d) { return d.round; })
+                .rollup(function(values) {
+                    return {
+                        A: d3.mean(values, function(d) { return d.A }),
+                        B: d3.mean(values, function(d) { return d.B }),
+                        C: d3.mean(values, function(d) { return d.C }),
+                        D: d3.mean(values, function(d) { return d.D }),
+                        E: d3.mean(values, function(d) { return d.E }),
+                        F: d3.mean(values, function(d) { return d.F }),
+                        G: d3.mean(values, function(d) { return d.G })
+                    };
+                })
+                .map(data);
 
-        // Calculate win/lose of participant against one other randomly selected previous particpant from results.json
-        // Calculate win/lose against all other participants, which will be displayed in histogram
-        // Build D3 svg histogram of wins against other particpants, with x-axis being percentage of wins and the y-axis being the number that falls into each bin. Make each bin 1 percentage point.
+            console.log(means) // This is the empirical averages, which will be displayed in a bar chart that compares bars the height of the particpants allocations, and the Banzhaf allocation
 
 
+            // TO-DO
+            // Build D3 svg of barchart comparing the participants allocations, the empirical averages, and the Banzhaf 'ideal'
+
+            // Calculate win/lose of participant against one other randomly selected previous particpant from results.json
+            // Calculate win/lose against all other participants, which will be displayed in histogram
+            // Build D3 svg histogram of wins against other particpants, with x-axis being percentage of wins and the y-axis being the number that falls into each bin. Make each bin 1 percentage point.
 
 
 
-});
+
+
+        });
     </script>
 </body>
