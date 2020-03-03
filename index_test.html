@@ -152,48 +152,48 @@ blockquote {
                                 <th scope="row">A</th>
                                 <td>3</td>
                                 <td>50%</td>
-                                <td><input id="g-user-submit-inputA" type="tel" class="nytint-textinput g-num"></input></td>
+                                <td><input id="g-user-submit-inputA" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
                             </tr>
                             <tr>
                                 <th scope="row">B</th>
                                 <td>5</td>
                                 <td>50%</td>
-                                <td><input id="g-user-submit-inputB" type="tel" class="nytint-textinput g-num"></input></td>
+                                <td><input id="g-user-submit-inputB" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
                             </tr>
                             <tr>
                                 <th scope="row">C</th>
                                 <td>8</td>
                                 <td>50%</td>
-                                <td><input id="g-user-submit-inputC" type="tel" class="nytint-textinput g-num"></input></td>
+                                <td><input id="g-user-submit-inputC" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
                             </tr>
                             <tr>
                                 <th scope="row">D</th>
                                 <td>13</td>
                                 <td>50%</td>
-                                <td><input id="g-user-submit-inputD" type="tel" class="nytint-textinput g-num"></input></td>
+                                <td><input id="g-user-submit-inputD" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
                             </tr>
                             <tr>
                                 <th scope="row">E</th>
                                 <td>21</td>
                                 <td>50%</td>
-                                <td><input id="g-user-submit-inputE" type="tel" class="nytint-textinput g-num"></input></td>
+                                <td><input id="g-user-submit-inputE" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
                             </tr>
                             <tr>
                                 <th scope="row">F</th>
                                 <td>34</td>
                                 <td>50%</td>
-                                <td><input id="g-user-submit-inputF" type="tel" class="nytint-textinput g-num"></input></td>
+                                <td><input id="g-user-submit-inputF" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
                             </tr>
                             <tr>
                                 <th scope="row">G</th>
                                 <td>55</td>
                                 <td>50%</td>
-                                <td><input id="g-user-submit-inputG" type="tel" class="nytint-textinput g-num"></input></td>
+                                <td><input id="g-user-submit-inputG" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
                             </tr>
                             <tr>
                                 <th scope="row" colspan="3"></th>
                                 <td>
-                                    <div>Total Allocated: $<span class="g-total-allocated">0</span><span id="demo"></span></div>
+                                    <div>Total Allocated: $<span id="g-total-allocated">0</span></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -222,13 +222,13 @@ blockquote {
         totalHighWarning = d3.select(".g-totalHighWarning-warning"),
         totalLowWarning = d3.select(".g-totalLowWarning-warning"),
         totalAlloted = d3.select(".g-total-allocated"),
-        inputA = d3.select("g-user-submit-inputA"),
-        inputB = d3.select("g-user-submit-inputB"),
-        inputC = d3.select("g-user-submit-inputC"),
-        inputD = d3.select("g-user-submit-inputD"),
-        inputE = d3.select("g-user-submit-inputE"),
-        inputF = d3.select("g-user-submit-inputF"),
-        inputG = d3.select("g-user-submit-inputG");        ;
+        inputA = document.getElementById("g-user-submit-inputA"),
+        inputB = document.getElementById("g-user-submit-inputB"),
+        inputC = document.getElementById("g-user-submit-inputC"),
+        inputD = document.getElementById("g-user-submit-inputD"),
+        inputE = document.getElementById("g-user-submit-inputE"),
+        inputF = document.getElementById("g-user-submit-inputF"),
+        inputG = document.getElementById("g-user-submit-inputG");        ;
 
     var a = generateQAPairs(".g-option-1", ".g-answer-1", 30, 80);
     var b = generateQAPairs(".g-option-2", ".g-answer-2", 0, 49);
@@ -245,6 +245,27 @@ blockquote {
         d3.select(sel2).text(ansNum);
         d3.select(".g-answer-3").text(ansMin);
         return qNum;
+    }
+
+    function checktotalVar() {
+        var vA = inputA.value;
+        var vB = inputB.value;
+        var vC = inputC.value;
+        var vD = inputD.value;
+        var vE = inputE.value;
+        var vF = inputF.value;
+        var vG = inputG.value;
+        totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
+        if (totalVar == 100) {submitButton.classed("g-disabled", false);}
+        return totalVar
+    }
+
+
+
+    function myFunct() {
+     totalVal = checktotalVar()
+     document.getElementById("g-total-allocated").innerHTML = totalVal;
+
     }
 
     function generateState(sel3, sel4, sel5) {
@@ -273,29 +294,11 @@ blockquote {
         return st;
     }
 
+     submitButton.on("click", showAnswer);
 
-    function initializeInputListeners() {
-        inputBox.on('input', function(e) {
-            var isValid = checkInputValidity($(this).val());
-            submitButton.classed('g-disabled', !isValid);
-        });
-
-        inputBox.keyup(function(e) {
-            if (e.keyCode == 13) {
-                var v = Math.round($(this).val());
-                $(this).val(v);
-                var isValid = checkInputValidity(v);
-                if (isValid) showAnswer();
-            }
-        });
-    }
-
-    function checktotalVar(A, B, C, D, E, F, G) {
-        return totalVar = Math.round(Number(A) + Number(B) + Number(C) + Number(D) + Number(E) + Number(F) + Number(G))
-    }
 
     function checkInputValidity(val) {
-
+          totalVal = checktotalVar()
         //fire a warning if there are decimals
         var val2 = val;
 
@@ -309,18 +312,6 @@ blockquote {
             roundingWarning.classed("g-hidden", true);
         }
 
-        var vA = $("#g-user-submit-inputA").val();
-        var vB = $("#g-user-submit-inputB").val();
-        var vC = $("#g-user-submit-inputC").val();
-        var vD = $("#g-user-submit-inputD").val();
-        var vE = $("#g-user-submit-inputE").val();
-        var vF = $("#g-user-submit-inputF").val();
-        var vG = $("#g-user-submit-inputG").val();
-
-        var totalVal = checktotalVar(vA, vB, vC, vD, vE, vF, vG)
-        console.log(totalVar)
-        totalAlloted.text(Math.round(totalVal));
-
         if (totalVar > 100) {
             totalHighWarning.classed("g-hidden", false);
         } else {
@@ -333,54 +324,25 @@ blockquote {
             totalLowWarning.classed("g-hidden", true);
         }
 
+        if (totalVal == 100) {
+            submitButton.classed("g-disabled", false);
+        } else {
+            submitButton.classed("g-disabled", true);
+        }
+
         return (!isNaN(val2) && (val2 >= 0) && (val2 <= 100) && val2.toString().indexOf("x") < 0 && (totalVar == 100));
     }
 
-
-
-    d3.json(userResultsUrl, function(data) {
-        
-        console.log(data);
-        const totalPlayers =
-            d3.nest()
-            .key(d => d.round)
-            .rollup(d => d.length)
-            .entries(data);
-
-        console.log(JSON.stringify(totalPlayers))
-
-        var totals =
-            d3.nest()
-            .key(function(d) { return d.round; })
-            .rollup(function(values) {
-                return {
-                    A: d3.mean(values, function(d) { return d.A }),
-                    B: d3.mean(values, function(d) { return d.B }),
-                    C: d3.mean(values, function(d) { return d.C }),
-                    D: d3.mean(values, function(d) { return d.D }),
-                    E: d3.mean(values, function(d) { return d.E }),
-                    F: d3.mean(values, function(d) { return d.F }),
-                    G: d3.mean(values, function(d) { return d.G })
-                };
-            })
-            .map(data);
-
-        console.log(totals)
-     submitButton.on("click", showAnswer);
-     initializeInputListeners();
-
-
-
     function showAnswer() {
-
+console.log("adf")
         //check validity of answer backup
-        var vA = $("#g-user-submit-inputA").val();
-        var vB = $("#g-user-submit-inputB").val();
-        var vC = $("#g-user-submit-inputC").val();
-        var vD = $("#g-user-submit-inputD").val();
-        var vE = $("#g-user-submit-inputE").val();
-        var vF = $("#g-user-submit-inputF").val();
-        var vG = $("#g-user-submit-inputG").val();
+        var vA = inputA.value;
+        var vB = inputB.value;
+        var vC = inputC.value;
+        var vD = inputD.value;
+        var vE = inputE.value;
+        var vF = inputF.value;
+        var vG = inputG.value;
 
         var isValidA = checkInputValidity(vA);
         var isValidB = checkInputValidity(vB);
@@ -400,16 +362,14 @@ blockquote {
         if (!isValidF) return;
         if (!isValidG) return;
 
-        // if (!isValidTotal) return;
-
         //deactivate text input
-        $("#g-user-submit-inputA").blur();
-        $("#g-user-submit-inputB").blur();
-        $("#g-user-submit-inputC").blur();
-        $("#g-user-submit-inputD").blur();
-        $("#g-user-submit-inputE").blur();
-        $("#g-user-submit-inputF").blur();
-        $("#g-user-submit-inputG").blur();
+        inputA.blur();
+        inputB.blur();
+        inputC.blur();
+        inputD.blur();
+        inputE.blur();
+        inputF.blur();
+        inputG.blur();
 
         //turn off the whole input container
         d3.select("#g-input").classed("g-disabled", true);
@@ -423,19 +383,63 @@ blockquote {
         userGuessF = +document.getElementById('g-user-submit-inputF').value;
         userGuessG = +document.getElementById('g-user-submit-inputG').value;
 
+     var currentTime = (new Date()).getTime();
+
         var userData = {
-            guessA: userGuessA,
-            guessB: userGuessB,
-            guessC: userGuessC,
-            guessD: userGuessD,
-            guessE: userGuessE,
-            guessF: userGuessF,
-            guessG: userGuessG,
-            mobile: mobile,
+            A: userGuessA,
+            B: userGuessB,
+            C: userGuessC,
+            D: userGuessD,
+            E: userGuessE,
+            F: userGuessF,
+            G: userGuessG,
+            date: Date(),
             timePondered: ((new Date()).getTime() - currentTime) / 1000
         };
         console.log(userData)
    };
+
+// This starts the collection of data from the JSON database
+     d3.json(userResultsUrl)
+          .then(function(data) {
+               // if (error) throw error;
+
+          console.log(data); // Shows all data in the console
+
+        var totalPlayers = Object.keys(data).length;
+          console.log(totalPlayers) // Shows the total number of previous participants
+        
+
+        var means =
+            d3.nest()
+            .key(function(d) { return d.round; })
+            .rollup(function(values) {
+                return {
+                    A: d3.mean(values, function(d) { return d.A }),
+                    B: d3.mean(values, function(d) { return d.B }),
+                    C: d3.mean(values, function(d) { return d.C }),
+                    D: d3.mean(values, function(d) { return d.D }),
+                    E: d3.mean(values, function(d) { return d.E }),
+                    F: d3.mean(values, function(d) { return d.F }),
+                    G: d3.mean(values, function(d) { return d.G })
+                };
+            })
+            .map(data);
+
+        console.log(means) // This is the empirical averages, which will be displayed in a bar chart that compares bars the height of the particpants allocations, and the Banzhaf allocation
+
+
+        // TO-DO
+        // Build D3 svg of barchart comparing the participants allocations, the empirical averages, and the Banzhaf 'ideal'
+
+        // Calculate win/lose of participant against one other randomly selected previous particpant from results.json
+        // Calculate win/lose against all other participants, which will be displayed in histogram
+        // Build D3 svg histogram of wins against other particpants, with x-axis being percentage of wins and the y-axis being the number that falls into each bin. Make each bin 1 percentage point.
+
+
+
+
+
 });
     </script>
 </body>
