@@ -257,6 +257,8 @@ blockquote {
         return qNum;
     }
 
+	//checks that user data is equal to 100
+
     function checktotalVar() {
         var vA = inputA.value;
         var vB = inputB.value;
@@ -407,7 +409,18 @@ blockquote {
             timePondered: ((new Date()).getTime() - currentTime) / 1000
         };
         console.log(userData)
+		
     };
+	
+	function coinToss() {
+		var coin = Math.floor(Math.random() * 1);
+		
+		if (coin == 0) {
+			return 0;
+		} else {
+			return 1;
+		}
+	};
 
     // This starts the collection of data from the JSON database
     d3.json(userResultsUrl)
@@ -440,9 +453,86 @@ blockquote {
             console.log(means) // This is the empirical averages, which will be displayed in a bar chart that compares bars the height of the particpants allocations, and the Banzhaf allocation
 
 
+				
+			//Begin accessing JSON data for calculations
+			var fs = require('fs');
+			fs.readFile(userResultsUrl, function(err, data){
+				if (err) throw err;
+			
+			var jsonID = Math.floor(Math.random() * totalPlayers);
+			
+			//parse the json file
+			var dataRead = JSON.parse(data); 
+		
+			var p1 = {userGuessA, userGuessB, userGuessC, userGuessD, userGuessE, userGuessF, userGuessG};
+			var p2 = [
+				{0: dataRead[jsonID].A}, {1: dataRead[jsonID].B}, {2: dataRead[jsonID].C}, {3: dataRead[jsonID].D}, {4: dataRead[jsonID].E}, {5: dataRead[jsonID].F}, {6: dataRead[jsonID].G},
+			]; 
+			
+			//Set initial vote-share to 50 for both players
+			let voteSharePlayer1 = 50;
+			let voteSharePlayer2 = 50;
+			let wins = 0; 
+			let losses = 0; 
+			
+			//Loop to compare user results to random player and calculate voteShare
+			for (let count = 0; count <= 6; count++) {
+				voteSharePlayer1 += p1[count] - p2[count].count;
+			};
+			
+			//Loop to invert the equation to add to random player
+			for (let count = 0; count <=6; count++) {
+				voteSharePlayer2 += p2[count].count - p1[count];
+			};
 
-
-
+			//Display both voteShares to console
+			console.log(voteSharePlayer1);
+			console.log(voteSharePlayer2);
+			
+			//Compare Player1 to every Player in database
+			for (let i = 0; i <= totalPlayers; i++) {
+				voteSharePlayer1 = 50;
+				voteSharePlayer2 = 50;
+			
+				//Calc for player1
+				for (let count = 0; count <= 6; count++) {
+					voteSharePlayer1 += p1[count] - p2[count].count;
+				};
+				
+				//Invert equation
+				for (let count = 0; count <= 6; count++) {
+					voteSharePlayer2 += p2[count].count - p1[count];
+				};
+			
+				//Calc total win/loss to add to histogram
+				if (voteSharePlayer1 > voteSharePlayer2) {
+					wins++;
+				} else if (voteSharePlayer1 == voteSharePlayer2) {
+					wins += coinToss();
+				} else {
+					losses++;
+				};
+				
+				//Display win/loss stats to console
+				console.log("Win/lose ratio: " + wins + "|" + losses);
+			};
+			
+			
+			//Add Player1 to database
+			dataRead.push({
+				"A": userGuessA, 
+				"B": userGuessB, 
+				"C": userGuessC,  
+				"D": userGuessD,
+				"E": userGuessE,
+				"F": userGuessF,
+				"G": userGuessG 
+			});
+			
+			//reserialize to JSON and update file
+			fs.writeFile(userResultsUrl, JSON.stringify(dataRead, null, 2), function(err) {
+				if (err) throw err;
+			});
         });
     </script>
 </body>
