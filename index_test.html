@@ -165,7 +165,7 @@ font-weight: 800;
 }
 </style>
 
-<body>
+<body onload="inputboxes()">
      <div class="jc-header">
           <h1 class="jc-title">Electoral College Game</h1>
      </div>
@@ -201,43 +201,43 @@ font-weight: 800;
                                    <th scope="row">A</th>
                                    <td>3</td>
                                    <td>50%</td>
-                                   <td><input id="jc-user-submit-inputA" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                                   <td><input id="jc-user-submit-inputA" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()"></input></td>
                               </tr>
                               <tr>
                                    <th scope="row">B</th>
                                    <td>5</td>
                                    <td>50%</td>
-                                   <td><input id="jc-user-submit-inputB" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                                   <td><input id="jc-user-submit-inputB" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()"></input></td>
                               </tr>
                               <tr>
                                    <th scope="row">C</th>
                                    <td>8</td>
                                    <td>50%</td>
-                                   <td><input id="jc-user-submit-inputC" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                                   <td><input id="jc-user-submit-inputC" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()"></input></td>
                               </tr>
                               <tr>
                                    <th scope="row">D</th>
                                    <td>13</td>
                                    <td>50%</td>
-                                   <td><input id="jc-user-submit-inputD" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                                   <td><input id="jc-user-submit-inputD" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()"></input></td>
                               </tr>
                               <tr>
                                    <th scope="row">E</th>
                                    <td>21</td>
                                    <td>50%</td>
-                                   <td><input id="jc-user-submit-inputE" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                                   <td><input id="jc-user-submit-inputE" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()"></input></td>
                               </tr>
                               <tr>
                                    <th scope="row">F</th>
                                    <td>34</td>
                                    <td>50%</td>
-                                   <td><input id="jc-user-submit-inputF" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                                   <td><input id="jc-user-submit-inputF" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()"></input></td>
                               </tr>
                               <tr>
                                    <th scope="row">G</th>
                                    <td>55</td>
                                    <td>50%</td>
-                                   <td><input id="jc-user-submit-inputG" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                                   <td><input id="jc-user-submit-inputG" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()"></input></td>
                               </tr>
                               <tr>
                                    <th scope="row" colspan="3"></th>
@@ -247,10 +247,10 @@ font-weight: 800;
                               </tr>
                          </table>
                          <button type="button" class="jc-submit jc-disabled">Submit</button>
-                         <div class="jc-input-notice jc-roundinjc-warning jc-hidden">This looks like a decimal. Just FYI, we’d round it to <span class="jc-decimal-eventual-round"></span>.</div>
+                         <div class="jc-input-notice jc-rounding-warning jc-hidden">This looks like a decimal. Just FYI, we’d round it to <span class="jc-decimal-eventual-round"></span>.</div>
                          <div class="jc-input-notice jc-out-of-bounds-warning jc-hidden">Please enter a number between 0 and 100.</div>
-                         <div class="jc-input-notice jc-totalHighWarninjc-warning jc-hidden">Please adjust your allocation so it doesn't exceed $100.</div>
-                         <div class="jc-input-notice jc-totalLowWarninjc-warning jc-hidden">You have not allocated all $100!</div>
+                         <div class="jc-input-notice jc-totalHighWarning-jc-warning jc-hidden">Please adjust your allocation so it doesn't exceed $100.</div>
+                         <div class="jc-input-notice jc-totalLowWarning-jc-warning jc-hidden">You have not allocated all $100!</div>
                     </div>
                </div>
           </div>
@@ -265,10 +265,10 @@ font-weight: 800;
                histogramTitle = d3.select(".jc-histogram-title"),
                totalParticipants = d3.select(".jc-participants"),
                eventualDecimalRound = d3.select(".jc-decimal-eventual-round"),
-               roundingWarning = d3.select(".jc-roundinjc-warning"),
+               roundingWarning = d3.select(".jc-rounding-warning"),
                outOfBoundsWarning = d3.select('.jc-out-of-bounds-warning'),
-               totalHighWarning = d3.select(".jc-totalHighWarninjc-warning"),
-               totalLowWarning = d3.select(".jc-totalLowWarninjc-warning"),
+               totalHighWarning = d3.select(".jc-totalHighWarning-jc-warning"),
+               totalLowWarning = d3.select(".jc-totalLowWarning-jc-warning"),
                totalAlloted = d3.select(".jc-total-allocated"),
                inputA = document.getElementById("jc-user-submit-inputA"),
                inputB = document.getElementById("jc-user-submit-inputB"),
@@ -329,7 +329,8 @@ font-weight: 800;
                var vE = inputE.value;
                var vF = inputF.value;
                var vG = inputG.value;
-               totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
+               // totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
+               totalVar = (Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
                if (totalVar == 100) {
                     submitButton.classed("jc-disabled", false);
                }
@@ -355,21 +356,60 @@ font-weight: 800;
                var isValidE = checkInputValidity(vE);
                var isValidF = checkInputValidity(vF);
                var isValidG = checkInputValidity(vG);
+
+
           }
+function inputboxes() {
+
+          var vA = inputA.value;
+          var vB = inputB.value;
+          var vC = inputC.value;
+          var vD = inputD.value;
+          var vE = inputE.value;
+          var vF = inputF.value;
+          var vG = inputG.value;
+
+          inputA.value = Math.round(vA);
+          inputB.value = Math.round(vB);
+          inputC.value = Math.round(vC);
+          inputD.value = Math.round(vD);
+          inputE.value = Math.round(vE);
+          inputF.value = Math.round(vF);
+          inputG.value = Math.round(vG);
+}
+
+function checkDecimal() {
+     var vA = inputA.value;
+     var vB = inputB.value;
+     var vC = inputC.value;
+     var vD = inputD.value;
+     var vE = inputE.value;
+     var vF = inputF.value;
+     var vG = inputG.value;
+
+     inputA.value = Math.round(vA);
+     inputB.value = Math.round(vB);
+     inputC.value = Math.round(vC);
+     inputD.value = Math.round(vD);
+     inputE.value = Math.round(vE);
+     inputF.value = Math.round(vF);
+     inputG.value = Math.round(vG);
+}
 
           function checkInputValidity(val) {
                totalVal = checktotalVar()
-               //fire a warning if there are decimals
+
                var val2 = val;
                outOfBoundsWarning.classed('jc-hidden', val2 >= 0 && val2 <= 100);
 
-               // fire a warning if?
-               if ((val2 / Math.floor(val2) !== 1) && (val2 <= 100) && !isNaN(val2 / Math.floor(val2))) {
-                    roundingWarning.classed("jc-hidden", false);
-                    eventualDecimalRound.text(Math.round(val2));
-               } else {
-                    roundingWarning.classed("jc-hidden", true);
-               }
+               // if ((val2 / Math.floor(val2) !== 1) && (val2 <= 100) && !isNaN(val2 / Math.floor(val2))) {
+               //fire a warning if there are decimals
+               // if ((totalVal/Math.floor(totalVal) !== 1) && (totalVal <= 100) && !isNaN(totalVal/Math.floor(totalVal))) {
+               //      roundingWarning.classed("jc-hidden", false);
+               //      eventualDecimalRound.text(Math.round(val));
+               // } else {
+               //      roundingWarning.classed("jc-hidden", true);
+               // }
 
                if (totalVal > 100) {
                     totalHighWarning.classed("jc-hidden", false);
@@ -389,7 +429,7 @@ font-weight: 800;
                     submitButton.classed("jc-disabled", true);
                }
 
-               return (!isNaN(val2) && (val2 >= 0) && (val2 <= 100) && val2.toString().indexOf("x") < 0 && (totalVar == 100));
+               return (!isNaN(val2) && (totalVar == 100));
           }
 
           submitButton.on("click", showAnswer);
