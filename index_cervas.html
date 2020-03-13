@@ -524,9 +524,9 @@ font-weight: 800;
 
             console.log(data); // Shows all data in the console
 
-            var totalPlayers = Object.keys(data).length;
-            totalParticipants.text(totalPlayers);
-            console.log(totalPlayers) // Shows the total number of previous participants
+            // var totalPlayers = Object.keys(data).length;
+            // totalParticipants.text(totalPlayers);
+            // console.log(totalPlayers) // Shows the total number of previous participants
 
 
             var means =
@@ -551,6 +551,10 @@ font-weight: 800;
 
     //Begin accessing JSON data for calculations
     $.getJSON(userResultsUrl, function(data) {
+
+            var totalPlayers = Object.keys(data).length;
+            totalParticipants.text(totalPlayers);
+            console.log(totalPlayers) // Shows the total number of previous participants
 
         var jsonID = Math.floor(Math.random() * totalPlayers);
 
