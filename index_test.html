@@ -1,93 +1,103 @@
-<script>      
-// TO-DO
+<!-- <script>
+     // TO-DO
 
 // Calculate win/lose of participant against one other randomly selected previous particpant from results.json (Vote-share starts at 50, increases by 1 for every $1 allocated, subtracted by 1 for every $1 by opponent. Voteshare will be different in future versions of this game)
 // Calculate win/lose against all other participants (calculated the same way as above, but only need to store 1|0 if win or lose, and then totaled, which will be displayed in histogram
 // Merge new participates data into the master database
 // Build D3 svg of barchart comparing the participants allocations, the empirical averages, and the Banzhaf 'ideal'
 // Build D3 svg histogram of wins against other particpants, with x-axis being percentage of wins and the y-axis being the number that falls into each bin. Make each bin 1 percentage point.
-</script>
-
+</script> -->
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"> -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://underscorejs.org/underscore-min.js"></script>
+     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <!-- <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"> -->
+     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+     <script src="https://d3js.org/d3.v5.min.js"></script>
+     <script src="https://underscorejs.org/underscore-min.js"></script>
 </head>
 <style>
-    .g-input-notice {
+     .jc-input-notice {
   font-size: 13px;
   font-weight: 400;
   margin-top: 9px;
   color: #AA66D3;
 }
-#g-input {
+#jc-input {
   margin-top: 30px;
   /* height: 60px; */
+    font-family: sans-serif;
+    margin: 1.5em auto;
+    /*max-width: 700px;*/
+    padding: 0 10px;
+    line-height: 1.7;
+    font-size: 1.1em;
+    font-weight: 300;
+    text-align: center;
 }
-.g-hidden {
+.jc-hidden {
   display: none;
 }
-.g-graphic {
-  font-family: nyt-franklin;
+.jc-graphic {
+  font-family: san-serif;
   font-size: 12px;
   font-weight: 300;
   width: 100%;
   position: relative;
   margin-bottom: 300px;
 }
-.g-graphic table {
-  text-align: center;
+table {
+     padding: 15px 20px 0;
+    margin: 10px auto 20px;
+    max-width: 600px;
+    background-color: rgba(0, 0, 0, .04);
+    color: #000000;
+    text-align: center;
 }
-.g-instructions-panel p {
-  font-family: nyt-franklin;
-  margin: 12px 0;
-  font-weight: 300;
+.jc-instructions-panel p {
+    font-family: sans-serif;
+    margin: 1.5em auto;
+    max-width: 700px;
+    padding: 0 10px;
+    line-height: 1.7;
+    font-size: 1.1em;
+    font-weight: 300
 }
-.g-overall-instructions {
+.jc-overall-instructions {
   margin-bottom: 25px;
 }
-.g-top-section p {
+.jc-top-section p {
   font-size: 17px;
   line-height: 1.4em;
 }
-.g-input-notice {
-  font-size: 13px;
-  font-weight: 400;
-  margin-top: 9px;
-  color: #AA66D3;
-}
+
 button,
 input {
   padding: 5px 8px;
   margin-right: 3px;
-  font-family: 'nyt-franklin', helvetica, arial, sans-serif;
+  font-family: sans-serif;
   font-size: 13px;
   border: none;
   border-radius: 3px;
   border: 1px solid #777;
 }
-button.g-submit {
+button.jc-submit {
   cursor: pointer;
   background: #16212B;
   border-color: #16212B;
   color: #fff;
 }
-button.g-submit:disabled,
-button.g-submit.g-disabled {
+button.jc-submit:disabled,
+button.jc-submit.jc-disabled {
   background: #999;
   border-color: #999;
 }
-.g-disabled {
+.jc-disabled {
   pointer-events: none;
   opacity: 0.5;
 }
 button:disabled {
-  /*background: #dedede;*/
   opacity: .5;
   pointer-events: none;
 }
@@ -97,20 +107,20 @@ input {
   background: #fff;
   text-align: center;
 }
-.g-input-notice {
+.jc-input-notice {
   font-size: 13px;
   font-weight: 400;
   margin-top: 9px;
   color: #AA66D3;
 }
-.g-select-container {
+.jc-select-container {
   font-family: nyt-franklin;
   font-weight: 300;
   position: absolute;
   left: 100%;
   display: none;
 }
-#g-note {
+#jc-note {
   font-weight: 300;
   font-size: 13px;
   color: #999;
@@ -124,6 +134,34 @@ blockquote {
   margin-right: 20px;
   margin-bottom: 20px;
   margin-left: 20px;
+}
+.jc-header {
+    max-width: 750px;
+    margin: 0 auto 10px;
+    display: block
+}
+h1.jc-title {
+font-size: 2em;
+text-align: center;
+margin: 0 auto;
+padding: 0 20px 10px;
+font-family: sans-serif;
+line-height: 1.2
+}
+.jc-instructions-panel li .jc-highlight,
+.jc-instructions-panel p .jc-highlight {
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #fefefe), color-stop(50%, rgba(0, 0, 0, .09)));
+    background-image: linear-gradient(90deg, #fefefe 50%, rgba(0, 0, 0, .09) 0);
+    background-position: 0;
+    background-size: 200%;
+    -webkit-transition: all .8s;
+    transition: all .8s;
+font-weight: 800;
+}
+.jc-instructions-panel li .jc-highlight.highlighted,
+.jc-instructions-panel p .jc-highlight.highlighted {
+    background-position: -100%;
+
 }
 </style>
 
