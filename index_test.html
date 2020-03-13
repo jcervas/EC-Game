@@ -283,92 +283,6 @@ font-weight: 800;
           var c = generateState(".jc-state-1", ".jc-state-1a", ".jc-ev-1");
           var c2 = generateState(".jc-state-2", ".jc-state-2a", ".jc-ev-2");
 
-          function generateQAPairs(sel1, sel2, floor, ceil) {
-               var dif = ceil - floor,
-                    qNum = Math.round(floor + Math.random() * dif),
-                    ansMin = qNum + 1
-               ansNum = Math.round(Math.floor(Math.random() * qNum));
-
-               d3.select(sel1).text(qNum);
-               d3.select(sel2).text(ansNum);
-               d3.select(".jc-answer-3").text(ansMin);
-               return qNum;
-          }
-
-          //checks that user data is equal to 100
-
-          function checktotalVar() {
-               var vA = inputA.value;
-               var vB = inputB.value;
-               var vC = inputC.value;
-               var vD = inputD.value;
-               var vE = inputE.value;
-               var vF = inputF.value;
-               var vG = inputG.value;
-               totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
-               if (totalVar == 100) {
-                    submitButton.classed("jc-disabled", false);
-               }
-               return totalVar
-          }
-
-          function myFunct() {
-               console.log("Checking Validity")
-               totalVal = checktotalVar()
-               document.getElementById("jc-total-allocated").innerHTML = totalVal;
-
-               var vA = inputA.value;
-               var vB = inputB.value;
-               var vC = inputC.value;
-               var vD = inputD.value;
-               var vE = inputE.value;
-               var vF = inputF.value;
-               var vG = inputG.value;
-
-               var isValidA = checkInputValidity(vA);
-               var isValidB = checkInputValidity(vB);
-               var isValidC = checkInputValidity(vC);
-               var isValidD = checkInputValidity(vD);
-               var isValidE = checkInputValidity(vE);
-               var isValidF = checkInputValidity(vF);
-               var isValidG = checkInputValidity(vG);
-          }
-
-          function checkInputValidity(val) {
-               totalVal = checktotalVar()
-               //fire a warning if there are decimals
-               var val2 = val;
-
-               outOfBoundsWarning.classed('jc-hidden', val2 >= 0 && val2 <= 100);
-
-               // fire a warning if?
-               if ((val2 / Math.floor(val2) !== 1) && (val2 <= 100) && !isNaN(val2 / Math.floor(val2))) {
-                    roundingWarning.classed("jc-hidden", false);
-                    eventualDecimalRound.text(Math.round(val2));
-               } else {
-                    roundingWarning.classed("jc-hidden", true);
-               }
-
-               if (totalVar > 100) {
-                    totalHighWarning.classed("jc-hidden", false);
-               } else {
-                    totalHighWarning.classed("jc-hidden", true);
-               }
-
-               if (totalVal < 100) {
-                    totalLowWarning.classed("jc-hidden", false);
-               } else {
-                    totalLowWarning.classed("jc-hidden", true);
-               }
-
-               if (totalVal == 100) {
-                    submitButton.classed("jc-disabled", false);
-               } else {
-                    submitButton.classed("jc-disabled", true);
-               }
-
-               return (!isNaN(val2) && (val2 >= 0) && (val2 <= 100) && val2.toString().indexOf("x") < 0 && (totalVar == 100));
-          }
           function generateState(sel3, sel4, sel5) {
                var state = "ABCDEFG";
                var st = state.substr(Math.floor(Math.random() * 7), 1);
@@ -395,10 +309,90 @@ font-weight: 800;
                return st;
           }
 
+          function generateQAPairs(sel1, sel2, floor, ceil) {
+               var dif = ceil - floor,
+                    qNum = Math.round(floor + Math.random() * dif),
+                    ansMin = qNum + 1
+               ansNum = Math.round(Math.floor(Math.random() * qNum));
+
+               d3.select(sel1).text(qNum);
+               d3.select(sel2).text(ansNum);
+               d3.select(".jc-answer-3").text(ansMin);
+               return qNum;
+          }
+
+          function checktotalVar() { //checks that user data is equal to 100
+               var vA = inputA.value;
+               var vB = inputB.value;
+               var vC = inputC.value;
+               var vD = inputD.value;
+               var vE = inputE.value;
+               var vF = inputF.value;
+               var vG = inputG.value;
+               totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
+               if (totalVar == 100) {
+                    submitButton.classed("jc-disabled", false);
+               }
+               return totalVar
+          }
+
+          function myFunct() { // console.log("Checking Validity of inputs")
+               totalVal = checktotalVar()
+               document.getElementById("jc-total-allocated").innerHTML = totalVal;
+
+               var vA = inputA.value;
+               var vB = inputB.value;
+               var vC = inputC.value;
+               var vD = inputD.value;
+               var vE = inputE.value;
+               var vF = inputF.value;
+               var vG = inputG.value;
+
+               var isValidA = checkInputValidity(vA);
+               var isValidB = checkInputValidity(vB);
+               var isValidC = checkInputValidity(vC);
+               var isValidD = checkInputValidity(vD);
+               var isValidE = checkInputValidity(vE);
+               var isValidF = checkInputValidity(vF);
+               var isValidG = checkInputValidity(vG);
+          }
+
+          function checkInputValidity(val) {
+               totalVal = checktotalVar()
+               //fire a warning if there are decimals
+               var val2 = val;
+               outOfBoundsWarning.classed('jc-hidden', val2 >= 0 && val2 <= 100);
+
+               // fire a warning if?
+               if ((val2 / Math.floor(val2) !== 1) && (val2 <= 100) && !isNaN(val2 / Math.floor(val2))) {
+                    roundingWarning.classed("jc-hidden", false);
+                    eventualDecimalRound.text(Math.round(val2));
+               } else {
+                    roundingWarning.classed("jc-hidden", true);
+               }
+
+               if (totalVal > 100) {
+                    totalHighWarning.classed("jc-hidden", false);
+               } else {
+                    totalHighWarning.classed("jc-hidden", true);
+               }
+
+               if (totalVal < 100) {
+                    totalLowWarning.classed("jc-hidden", false);
+               } else {
+                    totalLowWarning.classed("jc-hidden", true);
+               }
+
+               if (totalVal == 100) {
+                    submitButton.classed("jc-disabled", false);
+               } else {
+                    submitButton.classed("jc-disabled", true);
+               }
+
+               return (!isNaN(val2) && (val2 >= 0) && (val2 <= 100) && val2.toString().indexOf("x") < 0 && (totalVar == 100));
+          }
+
           submitButton.on("click", showAnswer);
-
-
-
 
           function showAnswer() {
                console.log("Answer Submitted")
