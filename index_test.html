@@ -312,49 +312,34 @@ font-weight: 800;
                return totalVar
           }
 
-
-
           function myFunct() {
+               console.log("Checking Validity")
                totalVal = checktotalVar()
                document.getElementById("jc-total-allocated").innerHTML = totalVal;
 
+               var vA = inputA.value;
+               var vB = inputB.value;
+               var vC = inputC.value;
+               var vD = inputD.value;
+               var vE = inputE.value;
+               var vF = inputF.value;
+               var vG = inputG.value;
+
+               var isValidA = checkInputValidity(vA);
+               var isValidB = checkInputValidity(vB);
+               var isValidC = checkInputValidity(vC);
+               var isValidD = checkInputValidity(vD);
+               var isValidE = checkInputValidity(vE);
+               var isValidF = checkInputValidity(vF);
+               var isValidG = checkInputValidity(vG);
           }
-
-          function generateState(sel3, sel4, sel5) {
-               var state = "ABCDEFG";
-               var st = state.substr(Math.floor(Math.random() * 7), 1);
-
-               if (st == "A") {
-                    ev = 3
-               } else if (st == "B") {
-                    ev = 5
-               } else if (st == "C") {
-                    ev = 8
-               } else if (st == "D") {
-                    ev = 13
-               } else if (st == "E") {
-                    ev = 21
-               } else if (st == "F") {
-                    ev = 34
-               } else {
-                    ev = 55
-               }
-               d3.select(sel3).text(st);
-               d3.select(sel4).text(st);
-               d3.select(sel5).text(ev);
-
-               return st;
-          }
-
-          submitButton.on("click", showAnswer);
-
 
           function checkInputValidity(val) {
                totalVal = checktotalVar()
                //fire a warning if there are decimals
                var val2 = val;
 
-               outOfBoundsWarning.classed('jc-hidden', val >= 0 && val <= 100);
+               outOfBoundsWarning.classed('jc-hidden', val2 >= 0 && val2 <= 100);
 
                // fire a warning if?
                if ((val2 / Math.floor(val2) !== 1) && (val2 <= 100) && !isNaN(val2 / Math.floor(val2))) {
@@ -384,6 +369,36 @@ font-weight: 800;
 
                return (!isNaN(val2) && (val2 >= 0) && (val2 <= 100) && val2.toString().indexOf("x") < 0 && (totalVar == 100));
           }
+          function generateState(sel3, sel4, sel5) {
+               var state = "ABCDEFG";
+               var st = state.substr(Math.floor(Math.random() * 7), 1);
+
+               if (st == "A") {
+                    ev = 3
+               } else if (st == "B") {
+                    ev = 5
+               } else if (st == "C") {
+                    ev = 8
+               } else if (st == "D") {
+                    ev = 13
+               } else if (st == "E") {
+                    ev = 21
+               } else if (st == "F") {
+                    ev = 34
+               } else {
+                    ev = 55
+               }
+               d3.select(sel3).text(st);
+               d3.select(sel4).text(st);
+               d3.select(sel5).text(ev);
+
+               return st;
+          }
+
+          submitButton.on("click", showAnswer);
+
+
+
 
           function showAnswer() {
                console.log("Answer Submitted")
