@@ -165,87 +165,90 @@ font-weight: 800;
 }
 </style>
 
-<body>
-    <h1>Electoral College Game</h1>
-    <div class="jc-graphic">
-        <div class="jc-top-section">
-            <div class="jc-fixie jc-illustration jc-select-container"></div>
-            <div class="jc-select-wrap"></div>
-            <div class="jc-instructions-panel">
-                <p>Your mission is to out-campaign your opponent, who is competing against you to be President.</p>
-                <p>Imagine that there are seven competitive states in the <strong>NOTUSISTAN</strong> Electoral College used for its presidential elections, operating under the same winner take all, weighted voting rules as in the US Electoral
-                    College.</p>
-                <p>Each player has <strong>$100</strong> to spend across the seven states, in increments of <strong>$1</strong> (No decimals or fractions in your numbers are allowed). By directing resources to states, you get a competitive
-                    advantage.
-                    For every $1 additional spent in a state, you gain an additional 1 percentage point in vote share. For every additional $1 spent by your opponent, you lose 1 percentage point (whoever spends the most money in the state, wins
-                    that
-                    state).</p>
-                <p>For example, if you allocate $<span class="jc-option-1"></span> to <em>State <span class="jc-state-1"></span></em>, and your opponent only allocated $<span class="jc-answer-1"></span>, you win <em>State <span class="jc-state-1a"></span>'s</em>
-                    <span class="jc-ev-1"></span> EC votes. If instead you allocated $<span class="jc-option-2"></span> to <em>State <span class="jc-state-2"></span></em>, your opponent would win <span class="jc-ev-2"></span> EC votes by allocating
-                    anything between $<span class="jc-answer-3"></span> and $100.</p>
-                <p>The seven states have Electors shown in the second column. There is a total of 139 EC votes, with <strong>70 needed to win</strong>.</p>
-                <p><strong>Ties in each state are decided by coin toss</strong>. There is no requirement to allocate any money in a state, or you can allocate up to the full allotment in just one state.</p>
-                <p>You compete against one other person, randomly selected from our database of <strong><span class="jc-participants"></span></strong> participants. You win only if you exceed 70 EC votes. </p>
-                <p>When you’re ready, <strong>enter your allotments below</strong>. (You can play as many times as you like, but only your first guess will count.)</p>
-                <div id="jc-input">
-                    <table width="50%" border="0">
-                        <tbody>
-                            <tr>
-                                <th scope="col">State</th>
-                                <th scope="col">EC Votes</th>
-                                <th scope="col">Initial Vote Share</th>
-                                <th scope="col">Allocation</th>
-                            </tr>
-                            <tr>
-                                <th scope="row">A</th>
-                                <td>3</td>
-                                <td>50%</td>
-                                <td><input id="jc-user-submit-inputA" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">B</th>
-                                <td>5</td>
-                                <td>50%</td>
-                                <td><input id="jc-user-submit-inputB" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">C</th>
-                                <td>8</td>
-                                <td>50%</td>
-                                <td><input id="jc-user-submit-inputC" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">D</th>
-                                <td>13</td>
-                                <td>50%</td>
-                                <td><input id="jc-user-submit-inputD" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">E</th>
-                                <td>21</td>
-                                <td>50%</td>
-                                <td><input id="jc-user-submit-inputE" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">F</th>
-                                <td>34</td>
-                                <td>50%</td>
-                                <td><input id="jc-user-submit-inputF" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">G</th>
-                                <td>55</td>
-                                <td>50%</td>
-                                <td><input id="jc-user-submit-inputG" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" colspan="3"></th>
-                                <td>
-                                    <div>Total Allocated: $<span id="jc-total-allocated">0</span></div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+<body onload="inputboxes()">
+     <div class="jc-header">
+          <h1 class="jc-title">Electoral College Game</h1>
+     </div>
+     <div class="jc-graphic">
+          <div class="jc-top-section">
+               <div class="jc-select-container"></div>
+               <div class="jc-instructions-panel">
+                    <p>Your mission is to out-campaign your opponent, who is competing against you to be President.</p>
+                    <p>Imagine that there are seven competitive states in the <span class="jc-highlight highlighted">NOTUSISTAN</span> Electoral College used for its presidential elections, operating under the same winner take all, weighted voting
+                         rules as in the US Electoral
+                         College.</p>
+                    <p>Each player has <span class="jc-highlight highlighted">$100</span> to spend across the seven states, in increments of <span class="jc-highlight highlighted">$1</span> (No decimals or fractions in your numbers are allowed). By
+                         directing resources to states, you get a competitive
+                         advantage.
+                         For every $1 additional spent in a state, you gain an additional 1 percentage point in vote share. For every additional $1 spent by your opponent, you lose 1 percentage point
+                         (whoever spends the most money in the state, wins
+                         that
+                         state).</p>
+                    <p>For example, if you allocate $<span class="jc-option-1"></span> to <em>State <span class="jc-state-1"></span></em>, and your opponent only allocated $<span class="jc-answer-1"></span>, you win <em>State <span class="jc-state-1a"></span>'s</em>
+                         <span class="jc-ev-1"></span> EC votes. If instead you allocated $<span class="jc-option-2"></span> to <em>State <span class="jc-state-2"></span></em>, your opponent would win <span class="jc-ev-2"></span> EC votes by
+                         allocating
+                         anything between $<span class="jc-answer-3"></span> and $100.</p>
+                    <p>The seven states have Electors shown in the second column. There is a total of 139 EC votes, with <span class="jc-highlight highlighted">70 needed to win</span>.</p>
+                    <p><span class="jc-highlight highlighted">Ties in each state are decided by coin toss</span>. There is no requirement to allocate any money in a state, or you can allocate up to the full allotment in just one state.</p>
+                    <p>You compete against one other person, randomly selected from our database of <span class="jc-highlight highlighted"><span class="jc-participants"></span></span> participants. You win only if you exceed 70 EC votes. </p>
+                    <p>When you’re ready, <span class="jc-highlight highlighted">enter your allotments below</span>. (You can play as many times as you like, but only your first guess will count.)</p>
+                    <div id="jc-input">
+                         <table width="50%" border="0">
+                              <tr>
+                                   <th scope="col">State</th>
+                                   <th scope="col">EC Votes</th>
+                                   <th scope="col">Initial Vote Share</th>
+                                   <th scope="col">Allocation</th>
+                              </tr>
+                              <tr>
+                                   <th scope="row">A</th>
+                                   <td>3</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputA" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()" onclick="this.select()" autofocus></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">B</th>
+                                   <td>5</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputB" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()" onclick="this.select()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">C</th>
+                                   <td>8</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputC" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()" onclick="this.select()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">D</th>
+                                   <td>13</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputD" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()" onclick="this.select()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">E</th>
+                                   <td>21</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputE" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()" onclick="this.select()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">F</th>
+                                   <td>34</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputF" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()" onclick="this.select()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">G</th>
+                                   <td>55</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputG" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()" onblur="checkDecimal()" onclick="this.select()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row" colspan="3"></th>
+                                   <td>
+                                        <div>Amount Remaining: $<span id="jc-total-allocated">100</span></div>
+                                   </td>
+                              </tr>
+                         </table>
                     <button type="button" class="jc-submit jc-disabled">Submit</button>
                     <div class="jc-input-notice jc-roundinjc-warning jc-hidden">This looks like a decimal. Just FYI, we’d round it to <span class="jc-decimal-eventual-round"></span>.</div>
                     <div class="jc-input-notice jc-out-of-bounds-warning jc-hidden">Please enter a number between 0 and 100.</div>
