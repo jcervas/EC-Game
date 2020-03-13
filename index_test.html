@@ -7,7 +7,6 @@
 // Build D3 svg of barchart comparing the participants allocations, the empirical averages, and the Banzhaf 'ideal'
 // Build D3 svg histogram of wins against other particpants, with x-axis being percentage of wins and the y-axis being the number that falls into each bin. Make each bin 1 percentage point.
 </script> -->
-
 <html>
 
 <head>
@@ -19,48 +18,60 @@
      <script src="https://underscorejs.org/underscore-min.js"></script>
 </head>
 <style>
-     .g-input-notice {
+     .jc-input-notice {
   font-size: 13px;
   font-weight: 400;
   margin-top: 9px;
   color: #AA66D3;
 }
-#g-input {
+#jc-input {
   margin-top: 30px;
   /* height: 60px; */
+    font-family: sans-serif;
+    margin: 1.5em auto;
+    /*max-width: 700px;*/
+    padding: 0 10px;
+    line-height: 1.7;
+    font-size: 1.1em;
+    font-weight: 300;
+    text-align: center;
 }
-.g-hidden {
+.jc-hidden {
   display: none;
 }
-.g-graphic {
-  font-family: nyt-franklin;
+.jc-graphic {
+  font-family: san-serif;
   font-size: 12px;
   font-weight: 300;
   width: 100%;
   position: relative;
   margin-bottom: 300px;
 }
-.g-graphic table {
-  text-align: center;
+table {
+     padding: 15px 20px 0;
+    margin: 10px auto 20px;
+    max-width: 600px;
+    background-color: rgba(0, 0, 0, .04);
+    color: #000000;
+    text-align: center;
 }
-.g-instructions-panel p {
-  font-family: nyt-franklin;
-  margin: 12px 0;
-  font-weight: 300;
+.jc-instructions-panel p {
+    font-family: sans-serif;
+    margin: 1.5em auto;
+    max-width: 700px;
+    padding: 0 10px;
+    line-height: 1.7;
+    font-size: 1.1em;
+    font-weight: 300
 }
-.g-overall-instructions {
+.jc-overall-instructions {
   margin-bottom: 25px;
 }
-.g-top-section p {
+.jc-top-section p {
   font-size: 17px;
   line-height: 1.4em;
 }
-.g-input-notice {
-  font-size: 13px;
-  font-weight: 400;
-  margin-top: 9px;
-  color: #AA66D3;
-}
+
 button,
 input {
   padding: 5px 8px;
@@ -71,18 +82,18 @@ input {
   border-radius: 3px;
   border: 1px solid #777;
 }
-button.g-submit {
+button.jc-submit {
   cursor: pointer;
   background: #16212B;
   border-color: #16212B;
   color: #fff;
 }
-button.g-submit:disabled,
-button.g-submit.g-disabled {
+button.jc-submit:disabled,
+button.jc-submit.jc-disabled {
   background: #999;
   border-color: #999;
 }
-.g-disabled {
+.jc-disabled {
   pointer-events: none;
   opacity: 0.5;
 }
@@ -97,20 +108,20 @@ input {
   background: #fff;
   text-align: center;
 }
-.g-input-notice {
+.jc-input-notice {
   font-size: 13px;
   font-weight: 400;
   margin-top: 9px;
   color: #AA66D3;
 }
-.g-select-container {
+.jc-select-container {
   font-family: nyt-franklin;
   font-weight: 300;
   position: absolute;
   left: 100%;
   display: none;
 }
-#g-note {
+#jc-note {
   font-weight: 300;
   font-size: 13px;
   color: #999;
@@ -125,309 +136,334 @@ blockquote {
   margin-bottom: 20px;
   margin-left: 20px;
 }
+.jc-header {
+    max-width: 750px;
+    margin: 0 auto 10px;
+    display: block
+}
+h1.jc-title {
+font-size: 2em;
+text-align: center;
+margin: 0 auto;
+padding: 0 20px 10px;
+font-family: sans-serif;
+line-height: 1.2
+}
+.jc-instructions-panel li .jc-highlight,
+.jc-instructions-panel p .jc-highlight {
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #fefefe), color-stop(50%, #ffea9b));
+    background-image: linear-gradient(90deg, #fefefe 50%, #ffea9b 0);
+    background-position: 0;
+    background-size: 200%;
+    -webkit-transition: all .8s;
+    transition: all .8s
+}
+.jc-instructions-panel li .jc-highlight.highlighted,
+.jc-instructions-panel p .jc-highlight.highlighted {
+    background-position: -100%
+}
 </style>
 
 <body>
-     <h1>Electoral College Game</h1>
-     <div class="g-graphic">
-          <div class="g-top-section">
-               <div class="g-fixie g-illustration g-select-container"></div>
-               <div class="g-select-wrap"></div>
-               <div class="g-instructions-panel">
+     <div class="jc-header">
+          <h1 class="jc-title">Electoral College Game</h1>
+     </div>
+     <div class="jc-graphic">
+          <div class="jc-top-section">
+               <div class="jc-select-container"></div>
+               <div class="jc-instructions-panel">
                     <p>Your mission is to out-campaign your opponent, who is competing against you to be President.</p>
                     <p>Imagine that there are seven competitive states in the <strong>NOTUSISTAN</strong> Electoral College used for its presidential elections, operating under the same winner take all, weighted voting rules as in the US Electoral
                          College.</p>
                     <p>Each player has <strong>$100</strong> to spend across the seven states, in increments of <strong>$1</strong> (No decimals or fractions in your numbers are allowed). By directing resources to states, you get a competitive
                          advantage.
-                         For every $1 additional spent in a state, you gain an additional 1 percentage point in vote share. For every additional $1 spent by your opponent, you lose 1 percentage point (whoever spends the most money in the state, wins
+                         For every <span class="jc-highlight highlighted">$1 additional spent in a state</span>, you gain an additional 1 percentage point in vote share. For every additional $1 spent by your opponent, you lose 1 percentage point
+                         (whoever spends the most money in the state, wins
                          that
                          state).</p>
-                    <p>For example, if you allocate $<span class="g-option-1"></span> to <em>State <span class="g-state-1"></span></em>, and your opponent only allocated $<span class="g-answer-1"></span>, you win <em>State <span class="g-state-1a"></span>'s</em>
-                         <span class="g-ev-1"></span> EC votes. If instead you allocated $<span class="g-option-2"></span> to <em>State <span class="g-state-2"></span></em>, your opponent would win <span class="g-ev-2"></span> EC votes by allocating
-                         anything between $<span class="g-answer-3"></span> and $100.</p>
+                    <p>For example, if you allocate $<span class="jc-option-1"></span> to <em>State <span class="jc-state-1"></span></em>, and your opponent only allocated $<span class="jc-answer-1"></span>, you win <em>State <span class="jc-state-1a"></span>'s</em>
+                         <span class="jc-ev-1"></span> EC votes. If instead you allocated $<span class="jc-option-2"></span> to <em>State <span class="jc-state-2"></span></em>, your opponent would win <span class="jc-ev-2"></span> EC votes by allocating
+                         anything between $<span class="jc-answer-3"></span> and $100.</p>
                     <p>The seven states have Electors shown in the second column. There is a total of 139 EC votes, with <strong>70 needed to win</strong>.</p>
                     <p><strong>Ties in each state are decided by coin toss</strong>. There is no requirement to allocate any money in a state, or you can allocate up to the full allotment in just one state.</p>
-                    <p>You compete against one other person, randomly selected from our database of <strong><span class="g-participants"></span></strong> participants. You win only if you exceed 70 EC votes. </p>
-                    <p>When you’re ready, <strong>enter your allotments below</strong>. (You can play as many times as you like, but only your first guess will count.)</p>
-                    <div id="g-input">
+                    <p>You compete against one other person, randomly selected from our database of <strong><span class="jc-participants"></span></strong> participants. You win only if you exceed 70 EC votes. </p>
+                    <p>When you’re ready, <strong>enter your allotments below</strong>. <span class="jc-highlight highlighted">(You can play as many times as you like, but only your first guess will count.)</span></p>
+                    <div id="jc-input">
                          <table width="50%" border="0">
-                              <tbody>
-                                   <tr>
-                                        <th scope="col">State</th>
-                                        <th scope="col">EC Votes</th>
-                                        <th scope="col">Initial Vote Share</th>
-                                        <th scope="col">Allocation</th>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row">A</th>
-                                        <td>3</td>
-                                        <td>50%</td>
-                                        <td><input id="g-user-submit-inputA" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row">B</th>
-                                        <td>5</td>
-                                        <td>50%</td>
-                                        <td><input id="g-user-submit-inputB" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row">C</th>
-                                        <td>8</td>
-                                        <td>50%</td>
-                                        <td><input id="g-user-submit-inputC" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row">D</th>
-                                        <td>13</td>
-                                        <td>50%</td>
-                                        <td><input id="g-user-submit-inputD" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row">E</th>
-                                        <td>21</td>
-                                        <td>50%</td>
-                                        <td><input id="g-user-submit-inputE" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row">F</th>
-                                        <td>34</td>
-                                        <td>50%</td>
-                                        <td><input id="g-user-submit-inputF" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row">G</th>
-                                        <td>55</td>
-                                        <td>50%</td>
-                                        <td><input id="g-user-submit-inputG" type="tel" class="nytint-textinput g-num" onkeyup="myFunct()"></input></td>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row" colspan="3"></th>
-                                        <td>
-                                             <div>Total Allocated: $<span id="g-total-allocated">0</span></div>
-                                        </td>
-                                   </tr>
-                              </tbody>
+                              <tr>
+                                   <th scope="col">State</th>
+                                   <th scope="col">EC Votes</th>
+                                   <th scope="col">Initial Vote Share</th>
+                                   <th scope="col">Allocation</th>
+                              </tr>
+                              <tr>
+                                   <th scope="row">A</th>
+                                   <td>3</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputA" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">B</th>
+                                   <td>5</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputB" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">C</th>
+                                   <td>8</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputC" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">D</th>
+                                   <td>13</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputD" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">E</th>
+                                   <td>21</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputE" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">F</th>
+                                   <td>34</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputF" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row">G</th>
+                                   <td>55</td>
+                                   <td>50%</td>
+                                   <td><input id="jc-user-submit-inputG" type="tel" class="nytint-textinput jc-num" onkeyup="myFunct()"></input></td>
+                              </tr>
+                              <tr>
+                                   <th scope="row" colspan="3"></th>
+                                   <td>
+                                        <div>Total Allocated: $<span id="jc-total-allocated">0</span></div>
+                                   </td>
+                              </tr>
                          </table>
-                         <button type="button" class="g-submit g-disabled">Submit</button>
-                         <div class="g-input-notice g-rounding-warning g-hidden">This looks like a decimal. Just FYI, we’d round it to <span class="g-decimal-eventual-round"></span>.</div>
-                         <div class="g-input-notice g-out-of-bounds-warning g-hidden">Please enter a number between 0 and 100.</div>
-                         <div class="g-input-notice g-totalHighWarning-warning g-hidden">Please adjust your allocation so it doesn't exceed $100.</div>
-                         <div class="g-input-notice g-totalLowWarning-warning g-hidden">You have not allocated all $100!</div>
+                         <button type="button" class="jc-submit jc-disabled">Submit</button>
+                         <div class="jc-input-notice jc-roundinjc-warning jc-hidden">This looks like a decimal. Just FYI, we’d round it to <span class="jc-decimal-eventual-round"></span>.</div>
+                         <div class="jc-input-notice jc-out-of-bounds-warning jc-hidden">Please enter a number between 0 and 100.</div>
+                         <div class="jc-input-notice jc-totalHighWarninjc-warning jc-hidden">Please adjust your allocation so it doesn't exceed $100.</div>
+                         <div class="jc-input-notice jc-totalLowWarninjc-warning jc-hidden">You have not allocated all $100!</div>
                     </div>
                </div>
           </div>
      </div>
+     <script>
+          var userResultsUrl = "results_tmp.json"
 
-<script>
-     var userResultsUrl = "results_tmp.json"
+          var graphic = d3.select(".jc-graphic"),
+               submitButton = d3.select(".jc-submit"),
+               bottomSection = d3.select(".jc-bottom-section"),
+               inputBox = $('input'),
+               histogramTitle = d3.select(".jc-histogram-title"),
+               totalParticipants = d3.select(".jc-participants"),
+               eventualDecimalRound = d3.select(".jc-decimal-eventual-round"),
+               roundingWarning = d3.select(".jc-roundinjc-warning"),
+               outOfBoundsWarning = d3.select('.jc-out-of-bounds-warning'),
+               totalHighWarning = d3.select(".jc-totalHighWarninjc-warning"),
+               totalLowWarning = d3.select(".jc-totalLowWarninjc-warning"),
+               totalAlloted = d3.select(".jc-total-allocated"),
+               inputA = document.getElementById("jc-user-submit-inputA"),
+               inputB = document.getElementById("jc-user-submit-inputB"),
+               inputC = document.getElementById("jc-user-submit-inputC"),
+               inputD = document.getElementById("jc-user-submit-inputD"),
+               inputE = document.getElementById("jc-user-submit-inputE"),
+               inputF = document.getElementById("jc-user-submit-inputF"),
+               inputG = document.getElementById("jc-user-submit-inputG");
 
-     var graphic = d3.select(".g-graphic"),
-          submitButton = d3.select(".g-submit"),
-          bottomSection = d3.select(".g-bottom-section"),
-          inputBox = $('input'),
-          histogramTitle = d3.select(".g-histogram-title"),
-          totalParticipants = d3.select(".g-participants"),
-          eventualDecimalRound = d3.select(".g-decimal-eventual-round"),
-          roundingWarning = d3.select(".g-rounding-warning"),
-          outOfBoundsWarning = d3.select('.g-out-of-bounds-warning'),
-          totalHighWarning = d3.select(".g-totalHighWarning-warning"),
-          totalLowWarning = d3.select(".g-totalLowWarning-warning"),
-          totalAlloted = d3.select(".g-total-allocated"),
-          inputA = document.getElementById("g-user-submit-inputA"),
-          inputB = document.getElementById("g-user-submit-inputB"),
-          inputC = document.getElementById("g-user-submit-inputC"),
-          inputD = document.getElementById("g-user-submit-inputD"),
-          inputE = document.getElementById("g-user-submit-inputE"),
-          inputF = document.getElementById("g-user-submit-inputF"),
-          inputG = document.getElementById("g-user-submit-inputG");
+          var a = generateQAPairs(".jc-option-1", ".jc-answer-1", 30, 80);
+          var b = generateQAPairs(".jc-option-2", ".jc-answer-2", 0, 49);
+          var c = generateState(".jc-state-1", ".jc-state-1a", ".jc-ev-1");
+          var c2 = generateState(".jc-state-2", ".jc-state-2a", ".jc-ev-2");
 
-     var a = generateQAPairs(".g-option-1", ".g-answer-1", 30, 80);
-     var b = generateQAPairs(".g-option-2", ".g-answer-2", 0, 49);
-     var c = generateState(".g-state-1", ".g-state-1a", ".g-ev-1");
-     var c2 = generateState(".g-state-2", ".g-state-2a", ".g-ev-2");
+          function generateQAPairs(sel1, sel2, floor, ceil) {
+               var dif = ceil - floor,
+                    qNum = Math.round(floor + Math.random() * dif),
+                    ansMin = qNum + 1
+               ansNum = Math.round(Math.floor(Math.random() * qNum));
 
-     function generateQAPairs(sel1, sel2, floor, ceil) {
-          var dif = ceil - floor,
-               qNum = Math.round(floor + Math.random() * dif),
-               ansMin = qNum + 1
-          ansNum = Math.round(Math.floor(Math.random() * qNum));
-
-          d3.select(sel1).text(qNum);
-          d3.select(sel2).text(ansNum);
-          d3.select(".g-answer-3").text(ansMin);
-          return qNum;
-     }
-
-     //checks that user data is equal to 100
-
-     function checktotalVar() {
-          var vA = inputA.value;
-          var vB = inputB.value;
-          var vC = inputC.value;
-          var vD = inputD.value;
-          var vE = inputE.value;
-          var vF = inputF.value;
-          var vG = inputG.value;
-          totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
-          if (totalVar == 100) {
-               submitButton.classed("g-disabled", false);
-          }
-          return totalVar
-     }
-
-
-
-     function myFunct() {
-          totalVal = checktotalVar()
-          document.getElementById("g-total-allocated").innerHTML = totalVal;
-
-     }
-
-     function generateState(sel3, sel4, sel5) {
-          var state = "ABCDEFG";
-          var st = state.substr(Math.floor(Math.random() * 7), 1);
-
-          if (st == "A") {
-               ev = 3
-          } else if (st == "B") {
-               ev = 5
-          } else if (st == "C") {
-               ev = 8
-          } else if (st == "D") {
-               ev = 13
-          } else if (st == "E") {
-               ev = 21
-          } else if (st == "F") {
-               ev = 34
-          } else {
-               ev = 55
-          }
-          d3.select(sel3).text(st);
-          d3.select(sel4).text(st);
-          d3.select(sel5).text(ev);
-
-          return st;
-     }
-
-     submitButton.on("click", showAnswer);
-
-
-     function checkInputValidity(val) {
-          totalVal = checktotalVar()
-          //fire a warning if there are decimals
-          var val2 = val;
-
-          outOfBoundsWarning.classed('g-hidden', val >= 0 && val <= 100);
-
-          // fire a warning if?
-          if ((val2 / Math.floor(val2) !== 1) && (val2 <= 100) && !isNaN(val2 / Math.floor(val2))) {
-               roundingWarning.classed("g-hidden", false);
-               eventualDecimalRound.text(Math.round(val2));
-          } else {
-               roundingWarning.classed("g-hidden", true);
+               d3.select(sel1).text(qNum);
+               d3.select(sel2).text(ansNum);
+               d3.select(".jc-answer-3").text(ansMin);
+               return qNum;
           }
 
-          if (totalVar > 100) {
-               totalHighWarning.classed("g-hidden", false);
-          } else {
-               totalHighWarning.classed("g-hidden", true);
+          //checks that user data is equal to 100
+
+          function checktotalVar() {
+               var vA = inputA.value;
+               var vB = inputB.value;
+               var vC = inputC.value;
+               var vD = inputD.value;
+               var vE = inputE.value;
+               var vF = inputF.value;
+               var vG = inputG.value;
+               totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
+               if (totalVar == 100) {
+                    submitButton.classed("jc-disabled", false);
+               }
+               return totalVar
           }
 
-          if (totalVal < 100) {
-               totalLowWarning.classed("g-hidden", false);
-          } else {
-               totalLowWarning.classed("g-hidden", true);
+
+
+          function myFunct() {
+               totalVal = checktotalVar()
+               document.getElementById("jc-total-allocated").innerHTML = totalVal;
+
           }
 
-          if (totalVal == 100) {
-               submitButton.classed("g-disabled", false);
-          } else {
-               submitButton.classed("g-disabled", true);
+          function generateState(sel3, sel4, sel5) {
+               var state = "ABCDEFG";
+               var st = state.substr(Math.floor(Math.random() * 7), 1);
+
+               if (st == "A") {
+                    ev = 3
+               } else if (st == "B") {
+                    ev = 5
+               } else if (st == "C") {
+                    ev = 8
+               } else if (st == "D") {
+                    ev = 13
+               } else if (st == "E") {
+                    ev = 21
+               } else if (st == "F") {
+                    ev = 34
+               } else {
+                    ev = 55
+               }
+               d3.select(sel3).text(st);
+               d3.select(sel4).text(st);
+               d3.select(sel5).text(ev);
+
+               return st;
           }
 
-          return (!isNaN(val2) && (val2 >= 0) && (val2 <= 100) && val2.toString().indexOf("x") < 0 && (totalVar == 100));
-     }
+          submitButton.on("click", showAnswer);
 
-     function showAnswer() {
-          console.log("adf")
-          //check validity of answer backup
-          var vA = inputA.value;
-          var vB = inputB.value;
-          var vC = inputC.value;
-          var vD = inputD.value;
-          var vE = inputE.value;
-          var vF = inputF.value;
-          var vG = inputG.value;
 
-          var isValidA = checkInputValidity(vA);
-          var isValidB = checkInputValidity(vB);
-          var isValidC = checkInputValidity(vC);
-          var isValidD = checkInputValidity(vD);
-          var isValidE = checkInputValidity(vE);
-          var isValidF = checkInputValidity(vF);
-          var isValidG = checkInputValidity(vG);
+          function checkInputValidity(val) {
+               totalVal = checktotalVar()
+               //fire a warning if there are decimals
+               var val2 = val;
 
-          // var isValidTotal = checkInputTotal(vA,vB,vC,vD,vE,vF,vG)
+               outOfBoundsWarning.classed('jc-hidden', val >= 0 && val <= 100);
 
-          if (!isValidA) return;
-          if (!isValidB) return;
-          if (!isValidC) return;
-          if (!isValidD) return;
-          if (!isValidE) return;
-          if (!isValidF) return;
-          if (!isValidG) return;
+               // fire a warning if?
+               if ((val2 / Math.floor(val2) !== 1) && (val2 <= 100) && !isNaN(val2 / Math.floor(val2))) {
+                    roundingWarning.classed("jc-hidden", false);
+                    eventualDecimalRound.text(Math.round(val2));
+               } else {
+                    roundingWarning.classed("jc-hidden", true);
+               }
 
-          //deactivate text input
-          inputA.blur();
-          inputB.blur();
-          inputC.blur();
-          inputD.blur();
-          inputE.blur();
-          inputF.blur();
-          inputG.blur();
+               if (totalVar > 100) {
+                    totalHighWarning.classed("jc-hidden", false);
+               } else {
+                    totalHighWarning.classed("jc-hidden", true);
+               }
 
-          //turn off the whole input container
-          d3.select("#g-input").classed("g-disabled", true);
+               if (totalVal < 100) {
+                    totalLowWarning.classed("jc-hidden", false);
+               } else {
+                    totalLowWarning.classed("jc-hidden", true);
+               }
 
-          //what was the user's guess?
-          userGuessA = +document.getElementById('g-user-submit-inputA').value;
-          userGuessB = +document.getElementById('g-user-submit-inputB').value;
-          userGuessC = +document.getElementById('g-user-submit-inputC').value;
-          userGuessD = +document.getElementById('g-user-submit-inputD').value;
-          userGuessE = +document.getElementById('g-user-submit-inputE').value;
-          userGuessF = +document.getElementById('g-user-submit-inputF').value;
-          userGuessG = +document.getElementById('g-user-submit-inputG').value;
+               if (totalVal == 100) {
+                    submitButton.classed("jc-disabled", false);
+               } else {
+                    submitButton.classed("jc-disabled", true);
+               }
 
-          var currentTime = (new Date()).getTime();
+               return (!isNaN(val2) && (val2 >= 0) && (val2 <= 100) && val2.toString().indexOf("x") < 0 && (totalVar == 100));
+          }
 
-          var userData = {
-               A: userGuessA,
-               B: userGuessB,
-               C: userGuessC,
-               D: userGuessD,
-               E: userGuessE,
-               F: userGuessF,
-               G: userGuessG,
-               date: Date(),
-               timePondered: ((new Date()).getTime() - currentTime) / 1000
+          function showAnswer() {
+               console.log("adf")
+               //check validity of answer backup
+               var vA = inputA.value;
+               var vB = inputB.value;
+               var vC = inputC.value;
+               var vD = inputD.value;
+               var vE = inputE.value;
+               var vF = inputF.value;
+               var vG = inputG.value;
+
+               var isValidA = checkInputValidity(vA);
+               var isValidB = checkInputValidity(vB);
+               var isValidC = checkInputValidity(vC);
+               var isValidD = checkInputValidity(vD);
+               var isValidE = checkInputValidity(vE);
+               var isValidF = checkInputValidity(vF);
+               var isValidG = checkInputValidity(vG);
+
+               // var isValidTotal = checkInputTotal(vA,vB,vC,vD,vE,vF,vG)
+
+               if (!isValidA) return;
+               if (!isValidB) return;
+               if (!isValidC) return;
+               if (!isValidD) return;
+               if (!isValidE) return;
+               if (!isValidF) return;
+               if (!isValidG) return;
+
+               //deactivate text input
+               inputA.blur();
+               inputB.blur();
+               inputC.blur();
+               inputD.blur();
+               inputE.blur();
+               inputF.blur();
+               inputG.blur();
+
+               //turn off the whole input container
+               d3.select("#jc-input").classed("jc-disabled", true);
+
+               //what was the user's guess?
+               userGuessA = +document.getElementById('jc-user-submit-inputA').value;
+               userGuessB = +document.getElementById('jc-user-submit-inputB').value;
+               userGuessC = +document.getElementById('jc-user-submit-inputC').value;
+               userGuessD = +document.getElementById('jc-user-submit-inputD').value;
+               userGuessE = +document.getElementById('jc-user-submit-inputE').value;
+               userGuessF = +document.getElementById('jc-user-submit-inputF').value;
+               userGuessG = +document.getElementById('jc-user-submit-inputG').value;
+
+               var currentTime = (new Date()).getTime();
+
+               var userData = {
+                    A: userGuessA,
+                    B: userGuessB,
+                    C: userGuessC,
+                    D: userGuessD,
+                    E: userGuessE,
+                    F: userGuessF,
+                    G: userGuessG,
+                    date: Date(),
+                    timePondered: ((new Date()).getTime() - currentTime) / 1000
+               };
+               console.log(userData)
+
           };
-          console.log(userData)
 
-     };
+          function coinToss() {
+               var coin = Math.floor(Math.random() * 1);
 
-     function coinToss() {
-          var coin = Math.floor(Math.random() * 1);
+               if (coin == 0) {
+                    return 0;
+               } else {
+                    return 1;
+               }
+          };
 
-          if (coin == 0) {
-               return 0;
-          } else {
-               return 1;
-          }
-     };
-
-     // This starts the collection of data from the JSON database
-     d3.json(userResultsUrl)
-          .then(function(data) {
+          // This starts the collection of data from the JSON database
+          d3.json(userResultsUrl)
+               .then(function(data) {
                     // if (error) throw error;
 
                     console.log(data); // Shows all data in the console
@@ -470,109 +506,110 @@ blockquote {
                          .map(data);
 
                     console.log(means) // This is the empirical averages, which will be displayed in a bar chart that compares bars the height of the particpants allocations, and the Banzhaf allocation
-});
+               });
 
 
-                    //Begin accessing JSON data for calculations
-                    var fs = require('fs');
-                    fs.readFile(userResultsUrl, function(err, data) {
-                         if (err) throw err;
+          //Begin accessing JSON data for calculations
+          var fs = require('fs');
+          fs.readFile(userResultsUrl, function(err, data) {
+               if (err) throw err;
 
-                         var jsonID = Math.floor(Math.random() * totalPlayers);
+               var jsonID = Math.floor(Math.random() * totalPlayers);
 
-                         //parse the json file
-                         var dataRead = JSON.parse(data);
+               //parse the json file
+               var dataRead = JSON.parse(data);
 
-                         var p1 = {
-                              userGuessA,
-                              userGuessB,
-                              userGuessC,
-                              userGuessD,
-                              userGuessE,
-                              userGuessF,
-                              userGuessG
-                         };
-                         var p2 = [{
-                              0: dataRead[jsonID].A
-                         }, {
-                              1: dataRead[jsonID].B
-                         }, {
-                              2: dataRead[jsonID].C
-                         }, {
-                              3: dataRead[jsonID].D
-                         }, {
-                              4: dataRead[jsonID].E
-                         }, {
-                              5: dataRead[jsonID].F
-                         }, {
-                              6: dataRead[jsonID].G
-                         }, ];
+               var p1 = {
+                    userGuessA,
+                    userGuessB,
+                    userGuessC,
+                    userGuessD,
+                    userGuessE,
+                    userGuessF,
+                    userGuessG
+               };
+               var p2 = [{
+                    0: dataRead[jsonID].A
+               }, {
+                    1: dataRead[jsonID].B
+               }, {
+                    2: dataRead[jsonID].C
+               }, {
+                    3: dataRead[jsonID].D
+               }, {
+                    4: dataRead[jsonID].E
+               }, {
+                    5: dataRead[jsonID].F
+               }, {
+                    6: dataRead[jsonID].G
+               }, ];
 
-                         //Set initial vote-share to 50 for both players
-                         let voteSharePlayer1 = 50;
-                         let voteSharePlayer2 = 50;
-                         let wins = 0;
-                         let losses = 0;
+               //Set initial vote-share to 50 for both players
+               let voteSharePlayer1 = 50;
+               let voteSharePlayer2 = 50;
+               let wins = 0;
+               let losses = 0;
 
-                         //Loop to compare user results to random player and calculate voteShare
-                         for (let count = 0; count <= 6; count++) {
-                              voteSharePlayer1 += p1[count] - p2[count].count;
-                         };
+               //Loop to compare user results to random player and calculate voteShare
+               for (let count = 0; count <= 6; count++) {
+                    voteSharePlayer1 += p1[count] - p2[count].count;
+               };
 
-                         //Loop to invert the equation to add to random player
-                         for (let count = 0; count <= 6; count++) {
-                              voteSharePlayer2 += p2[count].count - p1[count];
-                         };
+               //Loop to invert the equation to add to random player
+               for (let count = 0; count <= 6; count++) {
+                    voteSharePlayer2 += p2[count].count - p1[count];
+               };
 
-                         //Display both voteShares to console
-                         console.log(voteSharePlayer1);
-                         console.log(voteSharePlayer2);
+               //Display both voteShares to console
+               console.log(voteSharePlayer1);
+               console.log(voteSharePlayer2);
 
-                         //Compare Player1 to every Player in database
-                         for (let i = 0; i <= totalPlayers; i++) {
-                              voteSharePlayer1 = 50;
-                              voteSharePlayer2 = 50;
+               //Compare Player1 to every Player in database
+               for (let i = 0; i <= totalPlayers; i++) {
+                    voteSharePlayer1 = 50;
+                    voteSharePlayer2 = 50;
 
-                              //Calc for player1
-                              for (let count = 0; count <= 6; count++) {
-                                   voteSharePlayer1 += p1[count] - p2[count].count;
-                              };
+                    //Calc for player1
+                    for (let count = 0; count <= 6; count++) {
+                         voteSharePlayer1 += p1[count] - p2[count].count;
+                    };
 
-                              //Invert equation
-                              for (let count = 0; count <= 6; count++) {
-                                   voteSharePlayer2 += p2[count].count - p1[count];
-                              };
+                    //Invert equation
+                    for (let count = 0; count <= 6; count++) {
+                         voteSharePlayer2 += p2[count].count - p1[count];
+                    };
 
-                              //Calc total win/loss to add to histogram
-                              if (voteSharePlayer1 > voteSharePlayer2) {
-                                   wins++;
-                              } else if (voteSharePlayer1 == voteSharePlayer2) {
-                                   wins += coinToss();
-                              } else {
-                                   losses++;
-                              };
+                    //Calc total win/loss to add to histogram
+                    if (voteSharePlayer1 > voteSharePlayer2) {
+                         wins++;
+                    } else if (voteSharePlayer1 == voteSharePlayer2) {
+                         wins += coinToss();
+                    } else {
+                         losses++;
+                    };
 
-                              //Display win/loss stats to console
-                              console.log("Win/lose ratio: " + wins + "|" + losses);
-                         };
+                    //Display win/loss stats to console
+                    console.log("Win/lose ratio: " + wins + "|" + losses);
+               };
 
 
-                         //Add Player1 to database
-                         dataRead.push({
-                              "A": userGuessA,
-                              "B": userGuessB,
-                              "C": userGuessC,
-                              "D": userGuessD,
-                              "E": userGuessE,
-                              "F": userGuessF,
-                              "G": userGuessG
-                         });
+               //Add Player1 to database
+               dataRead.push({
+                    "A": userGuessA,
+                    "B": userGuessB,
+                    "C": userGuessC,
+                    "D": userGuessD,
+                    "E": userGuessE,
+                    "F": userGuessF,
+                    "G": userGuessG
+               });
 
-                         //reserialize to JSON and update file
-                         fs.writeFile(userResultsUrl, JSON.stringify(dataRead, null, 2), function(err) {
-                              if (err) throw err;
-                         });
-                    });
-</script>
+               //reserialize to JSON and update file
+               fs.writeFile(userResultsUrl, JSON.stringify(dataRead, null, 2), function(err) {
+                    if (err) throw err;
+               });
+          });
+     </script>
 </body>
+
 </html>
