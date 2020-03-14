@@ -190,7 +190,7 @@ font-weight: 800;
                     anything between $<span class="jc-answer-3"></span> and $100.</p>
                 <p>The seven states have Electors shown in the second column. There is a total of 139 EC votes, with <span class="jc-highlight highlighted">70 needed to win</span>.</p>
                 <p><span class="jc-highlight highlighted">Ties in each state are decided by coin toss</span>. There is no requirement to allocate any money in a state, or you can allocate up to the full allotment in just one state.</p>
-                <p>You compete against one other person, randomly selected from our database of <span class="jc-highlight highlighted"><span class="jc-participants"></span></span> participants. You win only if you exceed 70 EC votes. </p>
+                <p>You compete against one other person, randomly selected from our database of <span class="jc-highlight highlighted"><span class="jc-participants"></span> participants</span>. You win only if you exceed 70 EC votes. </p>
                 <p>When you’re ready, <span class="jc-highlight highlighted">enter your allotments below</span>. (You can play as many times as you like, but only your first guess will count.)</p>
                 <div id="jc-input">
                     <table width="50%" border="0">
@@ -280,11 +280,14 @@ font-weight: 800;
         inputE = document.getElementById("jc-user-submit-inputE"),
         inputF = document.getElementById("jc-user-submit-inputF"),
         inputG = document.getElementById("jc-user-submit-inputG");
+        var currentTime = (new Date()).getTime();
 
     var a = generateQAPairs(".jc-option-1", ".jc-answer-1", 30, 80);
     var b = generateQAPairs(".jc-option-2", ".jc-answer-2", 0, 49);
     var c = generateState(".jc-state-1", ".jc-state-1a", ".jc-ev-1");
     var c2 = generateState(".jc-state-2", ".jc-state-2a", ".jc-ev-2");
+
+    submitButton.on("click", showAnswer); // This triggers function to generate D3, and send user inputs to JSON
 
     function generateQAPairs(sel1, sel2, floor, ceil) {
         var dif = ceil - floor,
@@ -324,71 +327,53 @@ font-weight: 800;
         return st;
     }
 
-function  getValues() {
-  return inputA.value, inputB.value, inputC.value, inputD.value, inputE.value, inputF.value, inputG.value;
-}
+    function getValues() {
+        return [inputA.value, inputB.value, inputC.value, inputD.value, inputE.value, inputF.value, inputG.value];
+    }
+
     function myFunct() { // console.log("Checking Validity of inputs")
         totalVal = checktotalVar()
         document.getElementById("jc-total-allocated").innerHTML = (100 - totalVal);
 
-        var vA = inputA.value;
-        var vB = inputB.value;
-        var vC = inputC.value;
-        var vD = inputD.value;
-        var vE = inputE.value;
-        var vF = inputF.value;
-        var vG = inputG.value;
+        var userData = getValues()
 
-        var isValidA = checkInputValidity(vA);
-        var isValidB = checkInputValidity(vB);
-        var isValidC = checkInputValidity(vC);
-        var isValidD = checkInputValidity(vD);
-        var isValidE = checkInputValidity(vE);
-        var isValidF = checkInputValidity(vF);
-        var isValidG = checkInputValidity(vG);
-
-
+        var isValidA = checkInputValidity(userData[0]);
+        var isValidB = checkInputValidity(userData[1]);
+        var isValidC = checkInputValidity(userData[2]);
+        var isValidD = checkInputValidity(userData[3]);
+        var isValidE = checkInputValidity(userData[4]);
+        var isValidF = checkInputValidity(userData[5]);
+        var isValidG = checkInputValidity(userData[6]);
     }
 
     function inputboxes() {
 
-        var vA = inputA.value;
-        var vB = inputB.value;
-        var vC = inputC.value;
-        var vD = inputD.value;
-        var vE = inputE.value;
-        var vF = inputF.value;
-        var vG = inputG.value;
+        var userData = getValues()
 
-        inputA.value = Math.round(vA);
-        inputB.value = Math.round(vB);
-        inputC.value = Math.round(vC);
-        inputD.value = Math.round(vD);
-        inputE.value = Math.round(vE);
-        inputF.value = Math.round(vF);
-        inputG.value = Math.round(vG);
+        inputA.value = Math.round(userData[0]);
+        inputB.value = Math.round(userData[1]);
+        inputC.value = Math.round(userData[2]);
+        inputD.value = Math.round(userData[3]);
+        inputE.value = Math.round(userData[4]);
+        inputF.value = Math.round(userData[5]);
+        inputG.value = Math.round(userData[6]);
         inputA.select();
     }
 
     function checkDecimal() {
-        var vA = inputA.value;
-        var vB = inputB.value;
-        var vC = inputC.value;
-        var vD = inputD.value;
-        var vE = inputE.value;
-        var vF = inputF.value;
-        var vG = inputG.value;
+var userData = getValues()
 
-        inputA.value = Math.round(vA);
-        inputB.value = Math.round(vB);
-        inputC.value = Math.round(vC);
-        inputD.value = Math.round(vD);
-        inputE.value = Math.round(vE);
-        inputF.value = Math.round(vF);
-        inputG.value = Math.round(vG);
+        inputA.value = Math.round(userData[0]);
+        inputB.value = Math.round(userData[1]);
+        inputC.value = Math.round(userData[2]);
+        inputD.value = Math.round(userData[3]);
+        inputE.value = Math.round(userData[4]);
+        inputF.value = Math.round(userData[5]);
+        inputG.value = Math.round(userData[6]);
+
     }
 
-    function checkInputValidity(val) {     //checks that the inputs are valid
+    function checkInputValidity(val) { //checks that the inputs are valid
         totalVal = checktotalVar()
 
         var val2 = val;
@@ -425,15 +410,10 @@ function  getValues() {
     }
 
     function checktotalVar() { //checks that user data is equal to 100
-        var vA = inputA.value;
-        var vB = inputB.value;
-        var vC = inputC.value;
-        var vD = inputD.value;
-        var vE = inputE.value;
-        var vF = inputF.value;
-        var vG = inputG.value;
-        // totalVar = Math.round(Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
-        totalVar = (Number(vA) + Number(vB) + Number(vC) + Number(vD) + Number(vE) + Number(vF) + Number(vG))
+                var userData = getValues()
+                const add = (a, b) => +a + +b
+
+        totalVar = (userData.reduce(add))
         if (totalVar == 100) {
             submitButton.classed("jc-disabled", false);
         }
@@ -450,28 +430,18 @@ function  getValues() {
         }
     };
 
-submitButton.on("click", showAnswer); 
- 
     function showAnswer() {
         console.log("Checking Validity of Submitted Allocations")
         //check validity of answer backup
-        var vA = inputA.value;
-        var vB = inputB.value;
-        var vC = inputC.value;
-        var vD = inputD.value;
-        var vE = inputE.value;
-        var vF = inputF.value;
-        var vG = inputG.value;
+        var userData = getValues()
 
-        var isValidA = checkInputValidity(vA);
-        var isValidB = checkInputValidity(vB);
-        var isValidC = checkInputValidity(vC);
-        var isValidD = checkInputValidity(vD);
-        var isValidE = checkInputValidity(vE);
-        var isValidF = checkInputValidity(vF);
-        var isValidG = checkInputValidity(vG);
-
-        // var isValidTotal = checkInputTotal(vA,vB,vC,vD,vE,vF,vG)
+        var isValidA = checkInputValidity(userData[0]);
+        var isValidB = checkInputValidity(userData[1]);
+        var isValidC = checkInputValidity(userData[2]);
+        var isValidD = checkInputValidity(userData[3]);
+        var isValidE = checkInputValidity(userData[4]);
+        var isValidF = checkInputValidity(userData[5]);
+        var isValidG = checkInputValidity(userData[6]);
 
         if (!isValidA) return;
         if (!isValidB) return;
@@ -502,57 +472,22 @@ submitButton.on("click", showAnswer);
         userGuessF = +document.getElementById('jc-user-submit-inputF').value;
         userGuessG = +document.getElementById('jc-user-submit-inputG').value;
 
-        var currentTime = (new Date()).getTime();
+        userData = getValues()
 
         var userData = {
-            A: userGuessA,
-            B: userGuessB,
-            C: userGuessC,
-            D: userGuessD,
-            E: userGuessE,
-            F: userGuessF,
-            G: userGuessG,
+            A: userData[0],
+            B: userData[1],
+            C: userData[2],
+            D: userData[3],
+            E: userData[4],
+            F: userData[5],
+            G: userData[6],
             date: Date(),
             timePondered: ((new Date()).getTime() - currentTime) / 1000
         };
         console.log(userData)
 
     };
-
-
-
-    
-
-    // This starts the collection of data from the JSON database
-    d3.json(userResultsUrl)
-        .then(function(data) {
-            // if (error) throw error;
-
-            console.log(data); // Shows all data in the console
-
-            // var totalPlayers = Object.keys(data).length;
-            // totalParticipants.text(totalPlayers);
-            // console.log(totalPlayers) // Shows the total number of previous participants
-
-
-            var means =
-                d3.nest()
-                .key(function(d) { return d.round; })
-                .rollup(function(values) {
-                    return {
-                        A: d3.mean(values, function(d) { return d.A }),
-                        B: d3.mean(values, function(d) { return d.B }),
-                        C: d3.mean(values, function(d) { return d.C }),
-                        D: d3.mean(values, function(d) { return d.D }),
-                        E: d3.mean(values, function(d) { return d.E }),
-                        F: d3.mean(values, function(d) { return d.F }),
-                        G: d3.mean(values, function(d) { return d.G })
-                    };
-                })
-                .map(data);
-
-            console.log(means) // This is the empirical averages, which will be displayed in a bar chart that compares bars the height of the particpants allocations, and the Banzhaf allocation
-        });
 
 
     //Begin accessing JSON data for calculations
@@ -567,11 +502,11 @@ submitButton.on("click", showAnswer);
         //parse the json file
         //var dataRead = JSON.parse(data); 
 
-        // var p1 = { inputA.value, inputB.value, inputC.value, inputD.value, inputE.value, inputF.value, inputG.value };
         var p1 = getValues()
         var p2 = [
             { 0: data[jsonID].A }, { 1: data[jsonID].B }, { 2: data[jsonID].C }, { 3: data[jsonID].D }, { 4: data[jsonID].E }, { 5: data[jsonID].F }, { 6: data[jsonID].G }
         ];
+        console.log("Player 2 strategy:", p2)
 
         //Set initial vote-share to 50 for both players
         let voteSharePlayer1 = 50;
@@ -624,17 +559,20 @@ submitButton.on("click", showAnswer);
 
     //Add Player1 to database
     $.each(data, function(key, value) {
-        var user = ({
-            "A": inputA.value,
-            "B": inputB.value,
-            "C": inputC.value,
-            "D": inputD.value,
-            "E": inputE.value,
-            "F": inputF.value,
-            "G": inputG.value
-        });
+        var userData = getValues()
+        var userP1 = {
+            A: userData[0],
+            B: userData[1],
+            C: userData[2],
+            D: userData[3],
+            E: userData[4],
+            F: userData[5],
+            G: userData[6],
+            date: Date(),
+            timePondered: ((new Date()).getTime() - currentTime) / 1000
+        };
 
-        data.push(user);
+        data.push(userP1);
     });
 
     $.ajax({
@@ -649,5 +587,35 @@ submitButton.on("click", showAnswer);
 
     //user.push( "<li id= '" + key + "'>" + value + "</li>");
     //$.appendTo(data);
+    </script>
+
+
+    <script>
+            // This starts the collection of data from the JSON database
+    d3.json(userResultsUrl)
+        .then(function(data) {
+            // if (error) throw error;
+
+            // console.log(data); // Shows all data in the console
+
+            var means =
+                d3.nest()
+                .key(function(d) { return d.round; })
+                .rollup(function(values) {
+                    return {
+                        A: d3.mean(values, function(d) { return d.A }),
+                        B: d3.mean(values, function(d) { return d.B }),
+                        C: d3.mean(values, function(d) { return d.C }),
+                        D: d3.mean(values, function(d) { return d.D }),
+                        E: d3.mean(values, function(d) { return d.E }),
+                        F: d3.mean(values, function(d) { return d.F }),
+                        G: d3.mean(values, function(d) { return d.G })
+                    };
+                })
+                .map(data);
+
+            console.log(means) // This is the empirical averages, which will be displayed in a bar chart that compares bars the height of the particpants allocations, and the Banzhaf allocation
+        });
+
     </script>
 </body>
