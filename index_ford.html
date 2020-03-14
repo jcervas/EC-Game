@@ -561,7 +561,7 @@ font-weight: 800;
         //parse the json file
         //var dataRead = JSON.parse(data); 
 
-        var p1 = { userGuessA, userGuessB, userGuessC, userGuessD, userGuessE, userGuessF, userGuessG };
+        var p1 = { inputA.value, inputB.value, inputC.value, inputD.value, inputE.value, inputF.value, inputG.value };
         var p2 = [
             { 0: data[jsonID].A }, { 1: data[jsonID].B }, { 2: data[jsonID].C }, { 3: data[jsonID].D }, { 4: data[jsonID].E }, { 5: data[jsonID].F }, { 6: data[jsonID].G },
         ];
@@ -613,17 +613,18 @@ font-weight: 800;
             //Display win/loss stats to console
             console.log("Win/lose ratio: " + wins + "|" + losses);
         };
+    });
 
         //Add Player1 to database
         $.each(data, function(key, value) {
             var user = ({
-                "A": userGuessA,
-                "B": userGuessB,
-                "C": userGuessC,
-                "D": userGuessD,
-                "E": userGuessE,
-                "F": userGuessF,
-                "G": userGuessG
+                "A": inputA.value,
+                "B": inputB.value,
+                "C": inputC.value,
+                "D": inputD.value,
+                "E": inputE.value,
+                "F": inputF.value,
+                "G": inputG.value
             });
 
             data.push(user);
@@ -641,7 +642,6 @@ font-weight: 800;
 
         //user.push( "<li id= '" + key + "'>" + value + "</li>");
         //$.appendTo(data);
-
-    });
+         
     </script>
 </body>
