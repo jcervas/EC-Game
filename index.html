@@ -429,7 +429,12 @@ var userData = getValues()
             return 1;
         }
     };
+    $.getJSON(userResultsUrl, function(data) {
 
+        var totalPlayers = Object.keys(data).length;
+        totalParticipants.text(totalPlayers);
+        console.log("Total Players: ", totalPlayers) // Shows the total number of previous participants
+});
     function showAnswer() {
         console.log("Checking Validity of Submitted Allocations")
         //check validity of answer backup
@@ -479,48 +484,45 @@ var userData = getValues()
         };
         console.log("User Allocation: ", userData)
 
-    };
+    // };
 
 
     //Begin accessing JSON data for calculations
+
     $.getJSON(userResultsUrl, function(data) {
-
         var totalPlayers = Object.keys(data).length;
-        totalParticipants.text(totalPlayers);
-        console.log("Total Players: ", totalPlayers) // Shows the total number of previous participants
-
         var jsonID = Math.floor(Math.random() * totalPlayers);
-
+        console.log("P2 jsonID: ", jsonID)
         //parse the json file
         //var dataRead = JSON.parse(data); 
 
-        var p1 = getValues()
+        var p1 = getValues() // Get values from form
         var p2 = [
             { 0: data[jsonID].A }, { 1: data[jsonID].B }, { 2: data[jsonID].C }, { 3: data[jsonID].D }, { 4: data[jsonID].E }, { 5: data[jsonID].F }, { 6: data[jsonID].G }
         ];
         console.log("Player 2 strategy:", p2)
 
-        //Set initial vote-share to 50 for both players
+    //Set initial vote-share to 50 for both players
         let voteSharePlayer1 = 50;
         let voteSharePlayer2 = 50;
         let wins = 0;
         let losses = 0;
 
-        //Loop to compare user results to random player and calculate voteShare
+    //Loop to compare user results to random player and calculate voteShare
         for (let count = 0; count <= 6; count++) {
             voteSharePlayer1 += p1[count] - p2[count].count;
         };
 
-        //Loop to invert the equation to add to random player
+    //Loop to invert the equation to add to random player
         for (let count = 0; count <= 6; count++) {
             voteSharePlayer2 += p2[count].count - p1[count];
         };
 
-        //Display both voteShares to console
+    //Display both voteShares to console
         console.log(voteSharePlayer1);
         console.log(voteSharePlayer2);
 
-        //Compare Player1 to every Player in database
+    //Compare Player1 to every Player in database
         for (let i = 0; i <= totalPlayers; i++) {
             voteSharePlayer1 = 50;
             voteSharePlayer2 = 50;
@@ -550,7 +552,36 @@ var userData = getValues()
     });
 
     //Add Player1 to database
-    $.each(data, function(key, value) {
+    // $.each(data, function(key, value) {
+    //     var userData = getValues()
+    //     var userP1 = {
+    //         A: userData[0],
+    //         B: userData[1],
+    //         C: userData[2],
+    //         D: userData[3],
+    //         E: userData[4],
+    //         F: userData[5],
+    //         G: userData[6],
+    //         date: Date(),
+    //         timePondered: ((new Date()).getTime() - currentTime) / 1000
+    //     };
+
+    //     data.push(userP1);
+    // });
+
+    // $.ajax({
+    //     type: "GET",
+    //     dataType: 'json',
+    //     async: false,
+    //     url: userResultsUrl,
+    //     data: { data: JSON.stringify(data) },
+    //     success: function() { alert("File updated"); },
+    //     failure: function() { alert("Error updating file"); }
+    // });
+
+    //user.push( "<li id= '" + key + "'>" + value + "</li>");
+    //$.appendTo(data);
+
         var userData = getValues()
         var userP1 = {
             A: userData[0],
@@ -560,25 +591,41 @@ var userData = getValues()
             E: userData[4],
             F: userData[5],
             G: userData[6],
+            round: "round1",
             date: Date(),
             timePondered: ((new Date()).getTime() - currentTime) / 1000
         };
 
-        data.push(userP1);
-    });
+// From https://stackoverflow.com/questions/32546100/how-to-write-data-to-a-json-file-using-javascript
+var xhr = new XMLHttpRequest(),
+    jsonArr,
+    method = "GET",
+    jsonRequestURL = userResultsUrl;
 
-    $.ajax({
-        type: "GET",
-        dataType: 'json',
-        async: false,
-        url: userResultsUrl,
-        data: { data: JSON.stringify(data) },
-        success: function() { alert("File updated"); },
-        failure: function() { alert("Error updating file"); }
-    });
+xhr.open(method, jsonRequestURL, true);
+xhr.onreadystatechange = function()
+{
+    if(xhr.readyState == 4 && xhr.status == 200)
+    {
+        // we convert your JSON into JavaScript object
+        jsonArr = JSON.parse(xhr.responseText);
+console.log("jsonArr: ", jsonArr)
+        // we add new value:
+        jsonArr.push(userP1);
 
-    //user.push( "<li id= '" + key + "'>" + value + "</li>");
-    //$.appendTo(data);
+        // we send with new request the updated JSON file to the server:
+        xhr.open("POST", jsonRequestURL, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // if you want to handle the POST response write (in this case you do not need it):
+        // xhr.onreadystatechange = function(){ /* handle POST response */ };
+        xhr.send("jsonTxt="+JSON.stringify(jsonArr));
+        // but on this place you have to have a server for write updated JSON to the file
+    }
+};
+xhr.send(null);
+
+
+    };
     </script>
 
 
