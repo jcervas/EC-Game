@@ -259,7 +259,7 @@ line-height: 1.2
         </div>
     </div>
     <script>
-    var userResultsUrl = "results_tmp.json"
+    var userResultsUrl = "https://ec-game-cervas.s3-us-west-1.amazonaws.com/results_tmp.json"
 
     var graphic = d3.select(".jc-graphic"),
         submitButton = d3.select(".jc-submit"),
@@ -502,7 +502,7 @@ var userData = getValues()
         var p2 = [
             { 0: data[jsonID].A }, { 1: data[jsonID].B }, { 2: data[jsonID].C }, { 3: data[jsonID].D }, { 4: data[jsonID].E }, { 5: data[jsonID].F }, { 6: data[jsonID].G }
         ];
-        console.log("Player 2 strategy:", p2)
+        // console.log("Player 2 strategy:", p2)
 
     //Set initial vote-share to 50 for both players
         let voteSharePlayer1 = 50;
@@ -571,15 +571,26 @@ var userData = getValues()
         data.push(userP1);
     });
 
-    $.ajax({
-        type: "GET",
-        dataType: 'json',
-        async: false,
-        url: userResultsUrl,
-        data: { data: JSON.stringify(data) },
-        success: function() { alert("File updated"); },
-        failure: function() { alert("Error updating file"); }
-    });
+const fs = require('fs');
+
+
+fs.writeFile(userResultsUrl, data, 'utf8', function (err) {
+    if (err) {
+        console.log("An error occured while writing JSON Object to File.");
+        return console.log(err);
+    }
+ 
+    console.log("JSON file has been saved.");
+});
+    // $.ajax({
+    //     // type: "GET",
+    //     dataType: 'json',
+    //     async: false,
+    //     url: userResultsUrl,
+    //     data: { data: JSON.stringify(data) },
+    //     success: function() { alert("File updated"); },
+    //     failure: function() { alert("Error updating file"); }
+    // });
 
     // user.push( "<li id= '" + key + "'>" + value + "</li>");
     // $.appendTo(data);
