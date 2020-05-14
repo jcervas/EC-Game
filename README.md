@@ -1,3 +1,8 @@
+
+###### Test Run
+Preview of game can be viewed at <a href="http://polisci.uci.edu/~jcervas/projects/ec_game/index.html"> my UCI hosted site </a> or on <a href="https://ec-game-cervas.s3-us-west-1.amazonaws.com/index_cervas.html">AWS</a>.
+
+
 ## TO-DO
 
 - ~~Create a function to do a coin toss (in case of tie)~~
@@ -11,9 +16,6 @@
 - Build D3 svg of barchart comparing the participants allocations, the empirical averages, and the Banzhaf 'ideal'
 
 - Build D3 svg histogram of wins against other particpants, with x-axis being percentage of wins and the y-axis being the number that falls into each bin. Make each bin 1 percentage point.
-
-###### Test Run
-Preview of game can be viewed at <a href="http://polisci.uci.edu/~jcervas/projects/ec_game/index.html"> my UCI hosted site </a> or on <a href="https://ec-game-cervas.s3-us-west-1.amazonaws.com/index_cervas.html">AWS</a>.
 
 # EC Game Web Client
 
