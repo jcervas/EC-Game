@@ -12,7 +12,7 @@
 
 - Build D3 svg histogram of wins against other particpants, with x-axis being percentage of wins and the y-axis being the number that falls into each bin. Make each bin 1 percentage point.
 
-### Preview of game can be viewed at <a href="http://polisci.uci.edu/~jcervas/projects/ec_game/index.html"> my UCI hosted site </a> or on <a href="s3://ec-game-cervas/index_cervas.html">AWS</a>
+### Preview of game can be viewed at <a href="http://polisci.uci.edu/~jcervas/projects/ec_game/index.html"> my UCI hosted site </a> or on <a href="s3://ec-game-cervas/index_cervas.html">AWS</a>.
 
 # EC Game Web Client
 
