@@ -1,10 +1,15 @@
 ## TO-DO
 
 ~~Create a function to do a coin toss (in case of tie) ~~
+
 ~~Calculate win/lose of participant against one other randomly selected previous particpant from results.json (Vote-share starts at 50, increases by 1 for every $1 allocated, subtracted by 1 for every $1 by opponent. Voteshare will be different in future versions of this game) ~~
+
 - Calculate win/lose against all other participants (calculated the same way as above, but only need to store 1|0 if win or lose, and then totaled, which will be displayed in histogram
+
 - Merge new participates data into the master database
+
 - Build D3 svg of barchart comparing the participants allocations, the empirical averages, and the Banzhaf 'ideal'
+
 - Build D3 svg histogram of wins against other particpants, with x-axis being percentage of wins and the y-axis being the number that falls into each bin. Make each bin 1 percentage point.
 
 # EC Game Web Client
